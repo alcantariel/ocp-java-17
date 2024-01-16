@@ -16,7 +16,7 @@ Some key commands:
 
 ```bash
 # Converts .java source files into .class bytecode
-javac 
+javac
 
 # Executes the program
 java
@@ -123,3 +123,26 @@ In this chapter, the only top-level type is a class.
 A top-level type is a data structure that can be defined independently within a source file and it is often public.
 
 It is possible to put two types in the same file but at most one of the top-level types in the file is allowed to be public, and the public should match the filename. [Example](./Person.java).
+
+## Writing a main() Method
+
+A Java program begins execution with its main() method, it is the starting point that the JVM looks for when it begins running a new program.
+
+### Creating a main() Method
+
+The main() method lets the JVM call our code.
+
+[This code](./Main.java) prints "Hello, world!".
+
+To compile and execute:
+
+```bash
+javac Main.java
+java Main
+
+# Hello, world!
+```
+
+To compile Java code with the javac command, the file must have the extension .java.
+
+The result is a file bytecode with the same name but with a .class filename extension. That bytecode consists of instructions that the JVM knows how to execute.
