@@ -105,7 +105,7 @@ Includes anything starting from the symbol /* until the symbol */.
 
 ### Javadoc comment
 
-Is similar to a multiline comment, except it starts with /**. This special syntax tells the Javadoc tool to pay attention to the comment. Javadoc comments have a specific structure that the tool knows how to read.
+Is similar to a multiline comment, except it starts with /**. Javadoc comments have a specific structure that the tool knows how to read.
 
 ```java
 /**
@@ -114,4 +114,12 @@ Is similar to a multiline comment, except it starts with /**. This special synta
  */
 ```
 
-## Classes and Source files
+## Classes and Source Files
+
+Most of the time, each Java class is defined in its .java file.
+
+In this chapter, the only top-level type is a class.
+
+A top-level type is a data structure that can be defined independently within a source file and it is often public.
+
+It is possible to put two types in the same file but at most one of the top-level types in the file is allowed to be public, and the public should match the filename. [Example](./Person.java).
