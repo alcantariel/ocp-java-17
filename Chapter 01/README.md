@@ -146,3 +146,27 @@ java Main
 To compile Java code with the javac command, the file must have the extension .java.
 
 The result is a file bytecode with the same name but with a .class filename extension. That bytecode consists of instructions that the JVM knows how to execute.
+
+### Passing Parameters to a Java Program
+
+The new main class [MainWithArgs.java](./MainWithArgs.java) is printing the first two arguments passed in.
+
+To run passing parameters, execute:
+
+```bash
+javac MainWithArgs.java
+java MainWithArgs "Hello guys" Hi
+
+# Hello guys
+# Hi
+```
+
+### Single-File Source-Code
+
+There is a shortcut instead of running the `javac and java` commands, it is possible to run:
+
+```bash
+java MainWithArgs.java "Hello guys" Hi
+```
+
+There is a key difference, the .java extension. This feature is called launching single-file source-code programs and is designed for when our program is one file.
