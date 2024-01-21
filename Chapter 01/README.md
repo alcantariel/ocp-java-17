@@ -170,3 +170,19 @@ java MainWithArgs.java "Hello guys" Hi
 ```
 
 There is a key difference, the .java extension. This feature is called launching single-file source-code programs and is designed for when our program is one file.
+
+## Understanding Package Declarations and Imports
+
+Java comes with thousands of built-in classes, and Java needs a way to organize them.
+
+We can't just use some classes and try to compile, like:
+
+[NumberPicker without Import](./NumberPicker.java)
+
+Java compiler will throw an error saying that we are probably missing a required import statement for the Random class.
+
+A statement is an instruction, and import statements tell Java which packages to look in for classes.
+
+Trying this again with the import allows the code to compile:
+
+[NumberPicker with Import](./NumberPickerWithImport.java)
