@@ -186,3 +186,52 @@ A statement is an instruction, and import statements tell Java which packages to
 Trying this again with the import allows the code to compile:
 
 [NumberPicker with Import](./NumberPickerWithImport.java)
+
+### Packages
+
+The import statement tells the compiler which package to look in to find a class.
+
+If it begins with java, this means it came with the JDK.
+
+If it starts with something else, it likely shows where it came from using the website name in reverse. For example, `com.wiley.javabook` tells us the code is associated with `wiley.com`.
+
+We'll see package names that don't follow this convention too.
+
+### Wildcards
+
+Classes in the same package are often imported together. We can use a shortcut to import all the classes in a package.
+
+[WildcardClass.java](./WildcardClass.java)
+
+In this example, we imported `java.util.Random` and a pile of other classes.
+
+The `*` is a wildcard that matches all classes in the package. The import statement doesn't bring in child packages, fields, or methods; it imports only classes directly under the package.
+
+
+```java
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.*;
+```
+
+Only the last import allows the class to be recognized because child packages are not included with the first two.
+
+Including many classes doesn't slow down our program execution. The compiler figures out what's needed.
+
+### Redundant Imports
+
+We've been using `System` without import, and that's because there's one special package in Java called `java.lang` which is automatically imported.
+
+So import anything of `java.lang` inside our program is redundant. For example:
+
+```java
+import java.lang.System;
+import java.lang.*;
+```
+
+Or:
+
+```java
+import java.util.Random;
+import java.util.*;
+```
