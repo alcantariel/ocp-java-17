@@ -235,3 +235,43 @@ Or:
 import java.util.Random;
 import java.util.*;
 ```
+
+### Naming Conflicts
+
+One of the reasons for using packages is so that class names don't have to be unique across all of Java. This means we'll sometimes want to import a class that can be found in multiple places, such as the Date class.
+
+Java provides implementations of `java.util.Date` and `java.sql.Date`.
+
+When the class name is found in multiple packages and we try to import all with wildcards, Java gives us a compiler error.
+
+```java
+import java.util.*;
+import java.sql.*; // causes Date declaration to not compile
+```
+
+So we need to import the more specific class we want.
+
+```java
+import java.util.Date;
+import java.sql.*;
+```
+
+If we explicitly import a class name, it takes precedence over any wildcards present.
+
+What does Java do with "ties" for precedence?
+
+```java
+import java.util.Date;
+import java.sql.Date;
+```
+
+The compiler will tell us the imports are ambiguous.
+
+If we need to use two classes with the same name, we also can do something like:
+
+```java
+public class Conflicts {
+  java.util.Date date;
+  java.sql.Date sqlDate;
+}
+```
