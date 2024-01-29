@@ -275,3 +275,39 @@ public class Conflicts {
   java.sql.Date sqlDate;
 }
 ```
+
+### Creating a New Package
+
+All the code written in this chapter has been in the default package.
+
+This is a special unnamed package that we should use only for throwaway codes.
+
+The directory structure on our computer is related to the package name.
+
+Such as [packagea class](./packagea/ClassA.java) and [packageb class](./packageb/ClassB.java)
+
+When we run a Java program, Java knows where to look for those package names. In this case, running from /root works because both packagea and packageb are underneath it.
+
+### Compiling and Running Code with Packages
+
+```bash
+# Compiling file by file
+javac packagea/ClassA.java packageb/ClassB.java
+
+# Compiling using Wildcards
+javac packagea/*.java packageb/*.java
+
+# Running
+java packageb.ClassB
+```
+
+If it works, will print "Got it".
+
+Packages structure after compilation:
+
+- packagea
+  - ClassA.java
+  - ClassA.class
+- packageb
+  - ClassB.java
+  - ClassB.class
