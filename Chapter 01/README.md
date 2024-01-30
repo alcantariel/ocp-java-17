@@ -311,3 +311,52 @@ Packages structure after compilation:
 - packageb
   - ClassB.java
   - ClassB.class
+
+### Compiling to Another Directory
+
+By default, the javac command places the compiled classes in the same directory as the source code but also provides an option to place the class files into a different directory.
+
+The `-d` option specifies this target directory.
+
+Java options are case-sensitive. This means we cannot pass -D instead of -d.
+
+So, the command with the -d option would would look like this:
+
+```bash
+javac -d classes packagea/ClassA.java packageb/ClassB.java
+```
+
+The new packages structure after compilation:
+
+- packagea
+  - ClassA.java
+- packageb
+  - ClassB.java
+- classes
+  - packagea
+    - ClassA.class
+  - packageb
+    - ClassB.class
+
+To run the program, we need to specify the classpath, so Java knows where to find the classes.
+
+There are three options to do the same thing:
+
+```bash
+java -cp classes packageb.ClassB
+java -classpath classes packageb.ClassB
+java --class-path classes packageb.ClassB
+
+# all the options should print "Got it"
+```
+
+Important javac options:
+
+Option | Description
+------ | -----------
+-cp \<classpath> | Location of classes needed to compile the program
+-classpath \<classpath> |
+--class-path \<classpath> |
+-d \<dir> | Directory in which to place generated class files
+
+There are many other options available, and in the Modules chapter, we will learn these additional options.
