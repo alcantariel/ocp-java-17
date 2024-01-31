@@ -355,8 +355,82 @@ Important javac options:
 Option | Description
 ------ | -----------
 -cp \<classpath> | Location of classes needed to compile the program
--classpath \<classpath> |
---class-path \<classpath> |
--d \<dir> | Directory in which to place generated class files
+-classpath \<classpath>
+--class-path \<classpath>
+-d \<directory> | Directory in which to place generated class files
 
 There are many other options available, and in the Modules chapter, we will learn these additional options.
+
+### Compiling with JAR Files
+
+This technique is useful when the class files are located elsewhere or in special JAR files. A Java Archive (JAR) file is like a ZIP file of mainly Java class files.
+
+```bash
+java -cp ".:/tmp/someOtherLocation:/tmp/myJar.jar" myPackage.MyClass
+```
+
+The period (.) indicates that we want to include the `current directory` in the classpath. The rest of the command says to look for loose class files or packages in `someOtherLocation` and within `myJar.jar`.
+
+Just like when we're compiling, it's possible to use wildcards (*) to match all the JARs in a directory.
+
+```bash
+java -cp "/tmp/directoryWithJars/*" myPackage.MyClass
+```
+
+This command will add to the classpath all the JARs that are in the `directoryWithJars`. It won't include any JARs in the classpath that are in a subdirectory.
+
+### Creating a JAR File
+
+By using the jar command, the simplest commands create a jar containing the files in the current directory.
+
+We can use the short or long form for each option.
+
+```bash
+jar -cvf myNewFile.jar .
+jar --create --verbose --file myNewFile.jar .
+
+# We can also specify a directory instead of using the current directory.
+jar -cvf myNewFile.jar -C dir .
+
+# There is no long form of the -C option
+```
+
+Option | Description
+------ | -----------
+-c | Create a new JAR file
+--create
+-v | Prints details when working with JAR files
+--verbose
+-f | JAR filename
+--filename
+-C \<directory> | Directory containing files to be used to create the JAR
+
+### Ordering Elements in a Class
+
+Correct order to type them into a file.
+
+Comments can go anywhere in the code. Beyond that, we need to memorize the following rules:
+
+Element | Example | Required? | Where does it go?
+--------| ------- | --------- | -----------------
+Package declaration | package abc; | No | First line in the file (excluding comments or blank lines)
+Import statements | import java.util.* | No | Immediately after the package (if present)
+Top-level type declaration | public class C | Yes | Immediately after the import (if any)
+Field declarations | int value; | No | Any top-level element within a class
+Method declarations | void method() | No | Any top-level element within a class
+
+Example:
+
+```java
+package structure; // package must be first non-comment
+
+import java.util.*; // import must come after package
+
+public class Meerkat { // then comes the class
+  double weight; // fields and methods can go in either order
+
+  public double getWeight() {
+    return weight;
+  }
+}
+```
