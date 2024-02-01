@@ -434,3 +434,59 @@ public class Meerkat { // then comes the class
   }
 }
 ```
+
+## Creating Objects
+
+Remember that an object is an instance of a class.
+
+In the following sections, we'll look at constructors, object fields, instance initializers, and the order in which values are initialized.
+
+### Calling Constructors
+
+To create an instance of a class, all we have to do is write `new` before the class name and add parentheses after it, for example:
+
+```java
+Park p = new Park();
+```
+
+First, we declare the type that we'll be creating, that is `Park`, and give the variable a name `p`. This gives Java a place to store a reference to the object. Then we write `new Park()` to create the object.
+
+Park() looks like a method since it is followed by parentheses. It's called a `constructor` which is a special type of method that creates a new object.
+
+Defining a constructor:
+
+```java
+public class Chick {
+  public Chick() {
+    System.out.println("in constructor");
+  }
+}
+```
+
+There are two key points to note:
+
+- the name of the constructor matches the name of the class
+- there's no return type
+
+```java
+public class Chick {
+  public void Chick() {} // not a constructor
+}
+```
+
+The purpose of a constructor is to initialize fields, although we can put any code in there.
+
+Another way to initialize fields is to do so directly, for example, showing both approaches:
+
+```java
+public class Chick {
+  int numEggs = 12;
+  String name;
+
+  public Chick() {
+    name = "Duke";
+  }
+}
+```
+
+For most classes, we don't have to code a constructor, the compiler will supply a `"do nothing" default constructor` for us, but there are some scenarios that require us to define a constructor.
