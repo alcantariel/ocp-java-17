@@ -490,3 +490,93 @@ public class Chick {
 ```
 
 For most classes, we don't have to code a constructor, the compiler will supply a `"do nothing" default constructor` for us, but there are some scenarios that require us to define a constructor.
+
+### Reading and Writing Member Fields
+
+It's possible to read and write instance variables directly from the caller, for example:
+
+```java
+public class Swan {
+  int numberEggs; // instance variable
+
+  public static void main(String[] args) {
+    Swan mother = new Swan();
+    mother.numberEggs = 1; // set variable
+    System.out.println(mother.numberEggs); // read variable
+  }
+}
+```
+
+We can even read values of already initialized fields, for example:
+
+```java
+public class Name {
+  String first = "Theodore";
+  String last = "Moose";
+  Strinf full = first + last;
+}
+```
+
+### Executing Instance Initializer Blocks
+
+A code between braces (`{}`) is called a `code block`.
+
+Sometimes code blocks are inside a method, and these are run when the method is called.
+
+Other times, code blocks appear outside a method, and these are called `instance initializers`.
+
+How many instance initializers are in this example?
+
+```java
+public class Bird { // class definition
+  public static void main(String[] args) { // method instance
+    { System.out.println("Feathers"); } // inner block
+  }
+  { System.out.println("Snowy"); } // instance initializer
+}
+```
+
+There are four code blocks; a class definition, a method instance, an inner block and an instance initializer.
+
+When we're counting instance initializers, keep in mind that they cannot exist inside of a method.
+
+### Following the Order of Initialization
+
+When writing code that initializes fields in multiple places, we have to keep track of the order of initialization. This is simply the order in which different methods, constructors or blocks are called when an instance is created.
+
+- Fields and instance initializers blocks are run in the order in which they appear in the file
+- The constructor runs after all fields and instance initializer blocks have run
+
+[Look at this example](./OrderOfInitialization.java)
+
+Running this example prints this:
+
+```bash
+java OrderOfInitialization.java
+
+# setting field
+# setting constructor
+# Abel
+```
+
+Let's check another order of initialization example, what will the code print out?
+
+```java
+public class AnotherOrderOfInitialization {
+  public AnotherOrderOfInitialization() {
+    number = 5;
+  }
+
+  public static void main(String[] args) {
+    AnotherOrderOfInitialization another = new AnotherOrderOfInitialization();
+    System.out.println(another.number);
+  }
+
+  private int number = 3;
+  { number = 4; }
+}
+```
+
+The correct answer is 5.
+
+Fields and blocks are run first in the order, setting the number to 3 and then 4. Then the constructor runs, setting the number to 5.
