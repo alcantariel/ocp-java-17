@@ -625,3 +625,30 @@ The primary difference is that `short is signed`, which means it splits its rang
 Alternatively, `char is unsigned`, which means its range is strictly positive, including 0.
 
 Often, short and char values can be cast one to another because the underlying data size is the same.
+
+#### Writing Literals
+
+When a number is present in the code, it's called a `literal`. By default, Java assumes you are defining an int value with a numeric literal.
+
+In the following example, the number listed is bigger than what fits in an int.
+
+```java
+long max = 3123456789; // DOES NOT COMPILE
+```
+
+Java complains the number is out of range, and it is, for an int.
+
+However, we don't have an int. The solution is to add the character L to the number:
+
+```java
+long max = 3123456789L;
+```
+
+Use the uppercase L, the lowercase l looks like the number 1.
+
+Another way to specify numbers is to change the "base", and there are some number systems that Java allows us to specify:
+
+- Decimal Number System (digits 0-9): also called base 10 since there are 10 possible values for each digit
+- Octal (digits 0-7): which uses the number 0 as a prefix, for example, 017
+- Hexadecimal (digits 0-9 and letters A-F/a-f): which uses 0x or 0X as a prefix, for example, 0xFF, 0xff. Hexadecimal is case insensitive, so all of these examples mean the same value.
+- Binary (0-1 digits): which uses the number 0 followed by b or B as a prefix, for example, 0b10, 0B10
