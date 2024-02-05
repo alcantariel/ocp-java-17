@@ -648,7 +648,20 @@ Use the uppercase L, the lowercase l looks like the number 1.
 
 Another way to specify numbers is to change the "base", and there are some number systems that Java allows us to specify:
 
-- Decimal Number System (digits 0-9): also called base 10 since there are 10 possible values for each digit
+- Decimal (digits 0-9): also called base 10 since there are 10 possible values for each digit
 - Octal (digits 0-7): which uses the number 0 as a prefix, for example, 017
 - Hexadecimal (digits 0-9 and letters A-F/a-f): which uses 0x or 0X as a prefix, for example, 0xFF, 0xff. Hexadecimal is case insensitive, so all of these examples mean the same value.
 - Binary (0-1 digits): which uses the number 0 followed by b or B as a prefix, for example, 0b10, 0B10
+
+#### Literals and the Underscore Character
+
+We can have underscores in numbers to make them easier to read:
+
+```java
+int million1 = 1000000;
+int million2 = 1_000_000;
+```
+
+It's possible to add underscores anywhere except at the beginning of a literal, the end of a literal, right before a decimal point, or right after a decimal point.
+
+We can even place multiple underscore characters next to each other, although it's not recommended.
