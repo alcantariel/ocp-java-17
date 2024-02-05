@@ -580,3 +580,48 @@ public class AnotherOrderOfInitialization {
 The correct answer is 5.
 
 Fields and blocks are run first in the order, setting the number to 3 and then 4. Then the constructor runs, setting the number to 5.
+
+## Understanding Data Types
+
+Java applications contain two types of data: primitive types and reference types.
+
+### Using Primitive Types
+
+Java has eight built-in data types, referred to as the Java primitive types. These data types represent the building blocks for Java objects because all Java objects are just a complex collection of these primitive data types.
+
+They aren't an object nor does it represent an object.
+
+A primitive is just a single value in memory, such as a number or character.
+
+#### The Primitive Types
+
+Primitive types together with their size in bits and the range of values that each holds.
+
+Keyword | Type | Min value | Max value | Default value | Example
+--------|------|-----------|-----------|---------------|--------
+boolean | true or false | n/a | n/a | false | true
+byte | 8-bit integral value | -128 | 127 | 0 | 123
+short | 16-bit integral value | -32,768 | 32,767 | 0 | 123
+int | 32-bit integral value | -2,147,483,648 | 2,147,483,647 | 0 | 123
+long | 64-bit integral value | -2<sup>63</sup> | 2<sup>63</sup> - 1 | 0L | 123L
+float | 32-bit floating-point value | n/a | n/a | 0.0f | 123.45f
+double | 64-bit floating-point value | n/a | n/a | 0.0 | 123.456
+char | 16-bit Unicode value | 0 | 65,535 | \u0000 | 'a'
+
+Some key points:
+
+- The byte, short, int and long types are used for integer values without decimal points
+- Each numeric type uses twice as many bits as the smaller similar type. For example, short uses twict as many bits as byte does
+- All of the numeric types are signed and reserve one of their bits to cover a negative range. For example, instead of the byte covering 0 to 255, covers -128 to 127
+- A float requires the letter f or F following the number so Java knows it is a float, without an f or F, Java interprets a decimal value as a double
+- A long requires the letter l or L following the number so Java knows it is a long, without an l or L, Java interprets a number without a decimal point as an int
+
+#### Signed and Unsigned: short and char
+
+Short and char are closely related, as both are stored as integral types with the same 16-bit length.
+
+The primary difference is that `short is signed`, which means it splits its range across the positive and negative integers.
+
+Alternatively, `char is unsigned`, which means its range is strictly positive, including 0.
+
+Often, short and char values can be cast one to another because the underlying data size is the same.
