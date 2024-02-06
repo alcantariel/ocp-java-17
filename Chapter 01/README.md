@@ -694,3 +694,22 @@ greeting = new String("How are you?");
 The greeting reference points to a new String object, "How are you?".
 
 The String object does not have a name and can be accessed only via a corresponding reference.
+
+### Distinguishing between Primitives and Reference Types
+
+All primitive types have lowercase type names. All classes that come with Java begin with uppercase. Although not required, it is a standard practice, and we should follow this convention for classes we create as well.
+
+Reference types can be used to call methods, assuming the reference is not null. Primitives do not have methods declared on them, for example:
+
+```java
+String reference = "hello";
+int len = reference.length();
+int bad = len.length(); // DOES NOT COMPILE
+```
+
+Reference types can be assigned null, which means they do not currently refer to an object. Primitive types will give us a compiler error if we attempt to assign them null, for example:
+
+```java
+int value = null;
+String name = null;
+```
