@@ -713,3 +713,31 @@ Reference types can be assigned null, which means they do not currently refer to
 int value = null;
 String name = null;
 ```
+
+### Creating Wrapper Classes
+
+Each primitive type has a wrapper class, which is an object type that corresponds to the primitive.
+
+Primitive type | Wrapper class | Wrapper class inherits Number? | Example of creating
+-------------- | ------------- | ------------------------------ | -------------------
+boolean | Boolean | No | Boolean.valueOf(true)
+byte | Byte | Yes | Byte.valueOf((byte) 1)
+short | Short | Yes | Short.valueOf((short) 1)
+int | Integer | Yes | Integer.valueOf(1)
+long | Long | Yes | Long.valueOf(1)
+float | Float | Yes | Float.valueOf((float) 1.0)
+double | Double | Yes | Double.valueOf(1.0)
+char | Character | No | Character.valueOf('c')
+
+All the numeric classes in the table extend the Number class, which means they all come with some methods: byteValue(), shortValue(), intValue(), longValue(), floatValue(), and doubleValue(). The Boolean and Character wrapper classes include booleanValue() and charValue() respectively.
+
+Those methods return the primitive value of a wrapper instance.
+
+```java
+Double apple = Double.valueOf("200.99");
+System.out.println(apple.byteValue()); // -56
+System.out.println(apple.intValue()); // 200
+System.out.println(apple.doubleValue()); // 200.99
+```
+
+These helper methods do their best to convert values but can result in a loss of precision.
