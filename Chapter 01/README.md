@@ -665,3 +665,32 @@ int million2 = 1_000_000;
 It's possible to add underscores anywhere except at the beginning of a literal, the end of a literal, right before a decimal point, or right after a decimal point.
 
 We can even place multiple underscore characters next to each other, although it's not recommended.
+
+### Using Reference Types
+
+A reference type refers to an object (an instance of a class).
+
+Unlike primitive types that hold their values in the memory where the variable is allocated, references do not hold the value of the object they refer to.
+
+Instead, a reference, "points" to an object by storing the memory address where the object is located, a concept referred to as a `pointer`.
+
+Look at this example, that declares and initializes reference types. Suppose we declare a reference of type String:
+
+```java
+String greeting;
+```
+
+The greeting variable is a reference that can only point to a String object. A value is assigned to a reference in one of two ways:
+
+- A reference can be assigned to another object of the same or compatible type
+- A reference can be assigned to a new object using the new keyword
+
+For example, the following statement assigns this reference to a new object:
+
+```java
+greeting = new String("How are you?");
+```
+
+The greeting reference points to a new String object, "How are you?".
+
+The String object does not have a name and can be accessed only via a corresponding reference.
