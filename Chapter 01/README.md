@@ -371,7 +371,7 @@ java -cp ".:/tmp/someOtherLocation:/tmp/myJar.jar" myPackage.MyClass
 
 The period (.) indicates that we want to include the `current directory` in the classpath. The rest of the command says to look for loose class files or packages in `someOtherLocation` and within `myJar.jar`.
 
-Just like when we're compiling, it's possible to use wildcards (*) to match all the JARs in a directory.
+Just like when we're compiling, it is possible to use wildcards (*) to match all the JARs in a directory.
 
 ```bash
 java -cp "/tmp/directoryWithJars/*" myPackage.MyClass
@@ -451,7 +451,7 @@ Park p = new Park();
 
 First, we declare the type that we'll be creating, that is `Park`, and give the variable a name `p`. This gives Java a place to store a reference to the object. Then we write `new Park()` to create the object.
 
-Park() looks like a method since it is followed by parentheses. It's called a `constructor` which is a special type of method that creates a new object.
+Park() looks like a method since it is followed by parentheses. It is called a `constructor` which is a special type of method that creates a new object.
 
 Defining a constructor:
 
@@ -493,7 +493,7 @@ For most classes, we don't have to code a constructor, the compiler will supply 
 
 ### Reading and Writing Member Fields
 
-It's possible to read and write instance variables directly from the caller, for example:
+It is possible to read and write instance variables directly from the caller, for example:
 
 ```java
 public class Swan {
@@ -628,7 +628,7 @@ Often, short and char values can be cast one to another because the underlying d
 
 #### Writing Literals
 
-When a number is present in the code, it's called a `literal`. By default, Java assumes you are defining an int value with a numeric literal.
+When a number is present in the code, it is called a `literal`. By default, Java assumes you are defining an int value with a numeric literal.
 
 In the following example, the number listed is bigger than what fits in an int.
 
@@ -662,9 +662,9 @@ int million1 = 1000000;
 int million2 = 1_000_000;
 ```
 
-It's possible to add underscores anywhere except at the beginning of a literal, the end of a literal, right before a decimal point, or right after a decimal point.
+It is possible to add underscores anywhere except at the beginning of a literal, the end of a literal, right before a decimal point, or right after a decimal point.
 
-We can even place multiple underscore characters next to each other, although it's not recommended.
+We can even place multiple underscore characters next to each other, although it is not recommended.
 
 ### Using Reference Types
 
@@ -741,3 +741,35 @@ System.out.println(apple.doubleValue()); // 200.99
 ```
 
 These helper methods do their best to convert values but can result in a loss of precision.
+
+### Defining Text Blocks
+
+What if we want to have a String with something more complicated?
+
+For example, how to create a String with this value:
+
+"Java Study Guide" <br> &nbsp; by Scott & Jeanne
+
+Building this as a String requires two things:
+
+- `\"` lets us say what we want rather than end the String, it is called `escape characters`
+- `\n` says we want a `new line`
+
+With these two new skills, we can write:
+
+```java
+String eyeTest = "\"Java Study Guide\"\n by Scott & Jeanne";
+```
+
+While this does work, it is hard to read.
+
+So Java has text blocks, also known as multiline strings.
+
+A Text block starts and ends with three double quotes (`"""`), and the contents don't need to be escaped. This is much easier to read.
+
+```java
+String eyeTest = """
+  "Java Study Guide"
+    by Scott & Jeanne
+""";
+```
