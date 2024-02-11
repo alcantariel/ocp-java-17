@@ -889,3 +889,30 @@ Methods and variable names are typically written in camel case with the first le
 Class and interface names are also written in camel case with the first letter uppercase, such as `ArrayList`.
 
 Another style is called snake case. It simply uses an underscore (_) to separate words. Java generally uses uppercase snake case for constants and enum values, such as `NUMBER_FLAGS`.
+
+### Declaring Multiple Variables
+
+We can also declare and initialize multiple variables in the same statement.
+
+```java
+void sandFence() {
+  String s1, s2;
+  String s3 = "yes", s4 = "no";
+}
+```
+
+Four String variables were declared: s1, s2, s3 and s4. We can declare many variables in the same declaration as long as they are all of the same type. We can also initialize any or all of those values inline.
+
+```java
+void paintFence() {
+  int i1, i2, i3 = 0;
+}
+```
+
+Three variables were declared: i1, i2 and i3, but only i3 was initialized.
+
+```java
+double d1; double d2; // ALSO LEGAL. A semicolon (;) separates statements
+double d3, double d4; // DOES NOT COMPILE
+int num, String value; // DOES NOT COMPILE
+```
