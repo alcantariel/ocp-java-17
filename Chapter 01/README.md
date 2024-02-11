@@ -775,3 +775,117 @@ String eyeTest = """
 ```
 
 ## Declaring Variables
+
+A variable is a name for a piece of memory that stores data.
+
+When we declare a variable, we need to state the variable type along with giving it a name.
+
+To initialize a variable, we just type the variable name followed by an equal sign, followed by the desired value, for example:
+
+```java
+String zooName = "The Best Zoo";
+```
+
+### Identifying Identifiers
+
+An identifier is the name of a variable, method, class, interface or package.
+
+The rules for identifiers for variables apply to all of the other types that we are free to name.
+
+There are only four rules to remember for legal identifiers:
+
+- Must begin with a letter, a currency symbol or a _ symbol. Currency symbols include dollar ($), yuan (¥), euro (€) and so on
+- Can include numbers but not start with them
+- A single underscore _ is not allowed as an identifier
+- Cannot use the same name as a Java reserved word, which is a special word that Java has held aside so we are not allowed to use it
+
+Reserved words:
+
+<table>
+  <tr>
+    <td>abstract</td>
+    <td>assert</td>
+    <td>boolean</td>
+    <td>break</td>
+    <td>byte</td>
+  </tr>
+  <tr>
+    <td>case</td>
+    <td>catch</td>
+    <td>char</td>
+    <td>class</td>
+    <td>const*</td>
+  </tr>
+  <tr>
+    <td>continue</td>
+    <td>default</td>
+    <td>do</td>
+    <td>double</td>
+    <td>else</td>
+  </tr>
+  <tr>
+    <td>enum</td>
+    <td>extends</td>
+    <td>final</td>
+    <td>finally</td>
+    <td>float</td>
+  </tr>
+  <tr>
+    <td>for</td>
+    <td>goto*</td>
+    <td>if</td>
+    <td>implements</td>
+    <td>import</td>
+  </tr>
+  <tr>
+    <td>instanceof</td>
+    <td>int</td>
+    <td>interface</td>
+    <td>long</td>
+    <td>native</td>
+  </tr>
+  <tr>
+    <td>new</td>
+    <td>package</td>
+    <td>private</td>
+    <td>protected</td>
+    <td>public</td>
+  </tr>
+  <tr>
+    <td>return</td>
+    <td>short</td>
+    <td>static</td>
+    <td>strictfp</td>
+    <td>super</td>
+  </tr>
+  <tr>
+    <td>switch</td>
+    <td>synchronized</td>
+    <td>this</td>
+    <td>throw</td>
+    <td>throws</td>
+  </tr>
+  <tr>
+    <td>transient</td>
+    <td>try</td>
+    <td>void</td>
+    <td>volatile</td>
+    <td>while</td>
+  </tr>
+</table>
+
+The reserved words const and goto aren't used in Java but are reserved in case Java wants to use them one day.
+
+There are other names that we can't use. For example, true, false, and null are literal values, so they can't be variable names.
+
+### camelCase and snake_case
+
+Java has conventions so that code is readable and consistent.
+
+The camel case has the first letter of each word capitalized.
+
+Methods and variable names are typically written in camel case with the first letter lowercase, such as `toUpper()`.
+
+Class and interface names are also written in camel case with the first letter uppercase, such as `ArrayList`.
+
+Another style is called snake case. It simply uses an underscore (_) to separate words. Java generally uses uppercase snake case for constants and enum values, such as `NUMBER_FLAGS`.
