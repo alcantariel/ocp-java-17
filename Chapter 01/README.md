@@ -773,3 +773,5 @@ String eyeTest = """
     by Scott & Jeanne
 """;
 ```
+
+## Declaring Variables
