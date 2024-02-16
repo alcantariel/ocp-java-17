@@ -916,3 +916,14 @@ double d1; double d2; // ALSO LEGAL. A semicolon (;) separates statements
 double d3, double d4; // DOES NOT COMPILE
 int num, String value; // DOES NOT COMPILE
 ```
+
+## Initializing Variables
+
+Before we can use a variable, it needs a value. Some types of variables get this value set automatically, and others require the programmer to specify it.
+
+### Creating Local Variables
+
+A local variable is a variable defined within a constructor, methods or initializer block.
+
+#### Final Local Variables
+
