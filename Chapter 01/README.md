@@ -927,3 +927,23 @@ A local variable is a variable defined within a constructor, methods or initiali
 
 #### Final Local Variables
 
+The final keyword can be applied to local variables and is equivalent to declaring constants in other languages.
+
+```java
+final int = 10;
+int x = 20;
+y = x + 10; // DOES NOT COMPILE
+```
+
+Both variables are set, but y uses the final keyword and will trigger a compiler error since the value cannot be modified.
+
+The final modifiers can also be applied to local variable references.
+
+```java
+final int[] favoriteNumbers = new int[10];
+favoriteNumbers[0] = 10;
+favoriteNumbers[1] = 20;
+favoriteNumbers = null; // DOES NOT COMPILE
+```
+
+Notice that the content or data in the array can be modified. The compiler error isn't triggered until we try to change the value of the reference favoriteNumbers.
