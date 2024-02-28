@@ -1039,3 +1039,18 @@ public static void main(String[] args) {
 Instance and class variables do not require to be initialized, as soon as we declare these variables, they are given a default value.
 
 The compiler doesn't know what value to use and so wants the simplest value it can give the type: null for an object, zero for the numeric types, false for a boolean, and '\u0000' (NUL) for char.
+
+### Inferring the Type with var
+
+We have the option of using the keyword `var` instead of the type when declaring local variables under certain conditions.
+
+```java
+public class Zoo {
+  public void whatTypeAmI() {
+    var name = "Hello";
+    var size = 7;
+  }
+}
+```
+
+The formal name of this feature is `local variable type inference`, and can only be used with local variables and not as instance variables.
