@@ -982,3 +982,60 @@ public void checkAnswer() {
 
 The call to findAnswer() does not compile because it tries to use a variable that is not initialized.
 
+### Defining Instance and Class Variables
+
+Variables that are not local, are defined as instance variables or as class variables.
+
+#### Instance Variable
+
+An instance variable, often called a `field`, is a value defined within a specific instance of an object.
+
+Let's say we have a Person class with an instance variable name of type String.
+
+Each instance of the class would have its value for name.
+
+Two instances could have the same value for the name, but changing the value for one does not modify the other.
+
+```java
+public class Person {
+  String name;
+}
+
+public static void main(String[] args) {
+  Person person1 = new Person();
+  Person person2 = new Person();
+
+  person1.name = "Gabriel";
+  person2.name = "Travis";
+
+  System.out.println(person1.name); //Gabriel
+  System.out.println(person2.name); // Travis
+}
+```
+
+#### Class Variable
+
+A class variable is defined on the class level and shared among all instances of the class.
+
+It can even be publicly accessible to classes outside the class and doesn't require an instance to use.
+
+```java
+public class Counter {
+  static int value = 0;
+
+  public Counter() {
+    value++;
+  }
+}
+
+public static void main(String[] args) {
+  Counter counter1 = new Counter();
+  Counter counter2 = new Counter();
+
+  System.out.println(Counter.value); // 2
+}
+```
+
+Instance and class variables do not require to be initialized, as soon as we declare these variables, they are given a default value.
+
+The compiler doesn't know what value to use and so wants the simplest value it can give the type: null for an object, zero for the numeric types, false for a boolean, and '\u0000' (NUL) for char.
