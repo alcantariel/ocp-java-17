@@ -947,3 +947,18 @@ favoriteNumbers = null; // DOES NOT COMPILE
 ```
 
 Notice that the content or data in the array can be modified. The compiler error isn't triggered until we try to change the value of the reference favoriteNumbers.
+
+### Uninitialized Local Variables
+
+Local variables do not have a default value and must be initialized before use. Furthermore, the compiler will report an error if we try to read an uninitialized value.
+
+```java
+public int notValid() {
+  int y = 10;
+  int x;
+  int reply = x + y; // DOES NOT COMPILE
+  return reply;
+}
+```
+
+The y variable is initialized to 10, but x is not initialized before it is used, so the compiler is smart enough to recognize and generate an error.
