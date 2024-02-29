@@ -1066,3 +1066,23 @@ public void reassignment() {
   number = "five"; // DOES NOT COMPILE
 }
 ```
+
+## Managing Variable Scope
+
+We've learned that local variables are declared within a code block.
+
+How many variables do we have in this method?
+
+```java
+public void eat(int piecesOfCheese) {
+  int bitesOfCheese = 1;
+}
+```
+
+There are two variables with local scope.
+
+The `bitesOfCheese` variable is declared inside the method.
+
+The `piecesOfCheese` variable is a method parameter.
+
+Neither variable can be used outside where it is defined.
