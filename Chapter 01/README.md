@@ -1008,7 +1008,7 @@ public static void main(String[] args) {
   person1.name = "Gabriel";
   person2.name = "Travis";
 
-  System.out.println(person1.name); //Gabriel
+  System.out.println(person1.name); // Gabriel
   System.out.println(person2.name); // Travis
 }
 ```
@@ -1054,3 +1054,15 @@ public class Zoo {
 ```
 
 The formal name of this feature is `local variable type inference`, and can only be used with local variables and not as instance variables.
+
+### Type Inference of var
+
+When we use var, we are instructing the compiler to determine the type for us. The compiler looks at the code on the line of the declaration and uses it to infer the type.
+
+```java
+public void reassignment() {
+  var number = 7;
+  number = 4;
+  number = "five"; // DOES NOT COMPILE
+}
+```
