@@ -1086,3 +1086,22 @@ The `bitesOfCheese` variable is declared inside the method.
 The `piecesOfCheese` variable is a method parameter.
 
 Neither variable can be used outside where it is defined.
+
+### Limiting Scope
+
+Local variables don't have a scope larger than the block they are defined in, for example:
+
+```java
+public void eatIfHungry(boolean hungry) {
+  if (hungry) {
+    int bitesOfCheese = 1;
+  }
+
+  // bitesOfCheese goes out from scope here
+  System.out.println(bitesOfCheese); // DOES NOT COMPILE
+}
+```
+
+The variable hungry has a scope of the entire method, while the variable bitesofCheese has a smaller scope, existing only in the scope which is defined, between the braces ({}).
+
+### Tracing Scope
