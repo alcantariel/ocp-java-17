@@ -1102,6 +1102,46 @@ public void eatIfHungry(boolean hungry) {
 }
 ```
 
-The variable hungry has a scope of the entire method, while the variable bitesofCheese has a smaller scope, existing only in the scope which is defined, between the braces ({}).
+The variable hungry has a scope of the entire method, while the variable bitesOfCheese has a smaller scope, existing only in the scope which is defined, between the braces ({}).
 
 ### Tracing Scope
+```java
+public void eatMore(boolean hungry, int amountOfFood) {
+  int roomInBelly = 5;
+  if (hungry) {
+    boolean timeToEat = true;
+    while (amountOfFood > 0) {
+      int amountEaten = 2;
+      roomInBelly = roomInBelly - amountEaten;
+      amountOfFood = amountOfFood - amountEaten;
+    }
+  }
+}
+```
+
+Tracking scope by block
+
+Starting from the innermost set, the table shows the line numbers that each block stars and ends on.
+
+| Line | First line in block | Last line in block
+| ---- | ------------------- | ------------------
+| while | 15 | 19 |
+| if | 13 | 20 |
+| Method | 11 | 22 |
+
+### Applying Scope to Classes
+```java
+public class Mouse {
+  final static int MAX_LENGTH = 5;
+  int length;
+
+  public void grow(int inches) {
+    if (length < MAX_LENGTH) {
+      int newSize = length + inches;
+      length = newSize;
+    }
+  }
+}
+```
+
+In this class, we have one class variable, MAX_LENGTH; one instance variable, length, and two local variables, inches and newSize.
