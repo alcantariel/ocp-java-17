@@ -10,7 +10,7 @@ OCP exam objectives covered in this chapter:
 
 ## Major Components of Java
 
-The Java Development Kit (JDK) contains de minimum software needed to do Java development.
+The Java Development Kit (JDK) contains the minimum software needed to do Java development.
 
 Some key commands:
 
@@ -242,7 +242,7 @@ One of the reasons for using packages is so that class names don't have to be un
 
 Java provides implementations of `java.util.Date` and `java.sql.Date`.
 
-When the class name is found in multiple packages and we try to import all with wildcards, Java gives us a compiler error.
+When the class name is found in multiple packages, and we try to import all with wildcards, Java gives us a compiler error.
 
 ```java
 import java.util.*;
@@ -538,7 +538,7 @@ public class Bird { // class definition
 
 There are four code blocks; a class definition, a method instance, an inner block and an instance initializer.
 
-When we're counting instance initializers, keep in mind that they cannot exist inside of a method.
+When we're counting instance initializers, keep in mind that they cannot exist inside a method.
 
 ### Following the Order of Initialization
 
@@ -611,10 +611,10 @@ char | 16-bit Unicode value | 0 | 65,535 | \u0000 | 'a'
 Some key points:
 
 - The byte, short, int and long types are used for integer values without decimal points
-- Each numeric type uses twice as many bits as the smaller similar type. For example, short uses twict as many bits as byte does
-- All of the numeric types are signed and reserve one of their bits to cover a negative range. For example, instead of the byte covering 0 to 255, covers -128 to 127
-- A float requires the letter f or F following the number so Java knows it is a float, without an f or F, Java interprets a decimal value as a double
-- A long requires the letter l or L following the number so Java knows it is a long, without an l or L, Java interprets a number without a decimal point as an int
+- Each numeric type uses twice as many bits as the smaller similar type. For example, short uses twice as many bits as byte does
+- All the numeric types are signed and reserve one of their bits to cover a negative range. For example, instead of the byte covering 0 to 255, covers -128 to 127
+- A float requires the letter f or F following the number, so Java knows it is a float, without an f or F, Java interprets a decimal value as a double
+- A long requires the letter l or L following the number, so Java knows it is a long, without an l or L, Java interprets a number without a decimal point as an int
 
 #### Signed and Unsigned: short and char
 
@@ -650,7 +650,7 @@ Another way to specify numbers is to change the "base", and there are some numbe
 
 - Decimal (digits 0-9): also called base 10 since there are 10 possible values for each digit
 - Octal (digits 0-7): which uses the number 0 as a prefix, for example, 017
-- Hexadecimal (digits 0-9 and letters A-F/a-f): which uses 0x or 0X as a prefix, for example, 0xFF, 0xff. Hexadecimal is case insensitive, so all of these examples mean the same value.
+- Hexadecimal (digits 0-9 and letters A-F/a-f): which uses 0x or 0X as a prefix, for example, 0xFF, 0xff. Hexadecimal is case-insensitive, so all of these examples mean the same value.
 - Binary (0-1 digits): which uses the number 0 followed by b or B as a prefix, for example, 0b10, 0B10
 
 #### Literals and the Underscore Character
@@ -670,7 +670,7 @@ We can even place multiple underscore characters next to each other, although it
 
 A reference type refers to an object (an instance of a class).
 
-Unlike primitive types that hold their values in the memory where the variable is allocated, references do not hold the value of the object they refer to.
+Unlike primitive types that hold their values in the memory where the variable is allocated, the references do not hold the value of the object they refer to.
 
 Instead, a reference, "points" to an object by storing the memory address where the object is located, a concept referred to as a `pointer`.
 
@@ -790,7 +790,7 @@ String zooName = "The Best Zoo";
 
 An identifier is the name of a variable, method, class, interface or package.
 
-The rules for identifiers for variables apply to all of the other types that we are free to name.
+The rules for identifiers for variables apply to all the other types that we are free to name.
 
 There are only four rules to remember for legal identifiers:
 
@@ -901,7 +901,7 @@ void sandFence() {
 }
 ```
 
-Four String variables were declared: s1, s2, s3 and s4. We can declare many variables in the same declaration as long as they are all of the same type. We can also initialize any or all of those values inline.
+Four String variables were declared: s1, s2, s3 and s4. We can declare many variables in the same declaration as long as they are all the same type. We can also initialize any or all of those values inline.
 
 ```java
 void paintFence() {
@@ -1145,3 +1145,10 @@ public class Mouse {
 ```
 
 In this class, we have one class variable, MAX_LENGTH; one instance variable, length, and two local variables, inches and newSize.
+
+### Reviewing Scope
+
+- Local variables: in scope from declaration to the end of the block
+- Method parameters: in scope for the duration of the method
+- Instance variables: in scope from declaration until the object is eligible for garbage collection
+- Class variables: in scope from declaration until the program ends
