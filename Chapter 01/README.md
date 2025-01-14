@@ -1152,3 +1152,95 @@ In this class, we have one class variable, MAX_LENGTH; one instance variable, le
 - Method parameters: in scope for the duration of the method
 - Instance variables: in scope from declaration until the object is eligible for garbage collection
 - Class variables: in scope from declaration until the program ends
+
+## Destroying Objects
+
+The JVM takes care of destroying objects for us. Java provides a `garbage collector` to automatically look for objects that aren't needed anymore.
+
+Our code isn't the only process running in our Java program. Java code exists inside a JVM, which includes numerous processes independent of our application code.
+
+All Java objects are stored in our program memory's `heap`. The heap which is also referred to as the `free store`, and represents a large pool of unused memory allocated to our Java application.
+
+If our program keeps instantiating objects and leaving them on the heap, eventually it will run out of memory and crash and the garbage collector solves this problem.
+
+### Understanding Garbage Collection
+
+Garbage collection refers to the process of automatically freeing memory on the heap by deleting objects that are no longer reachable in our program.
+
+The objects that are no longer being accessible in a program are eligible for garbage collection, and the collection does not necessarily occur immediately when they are no longer accessible.
+
+Java includes a built-in method to help support garbage collection: `System.gc();`
+
+`This method is not guaranteed to do anything.`
+
+### Tracing Eligibility
+
+How does the JVM know when an object is eligible for garbage collection?
+
+The JVM waits and monitors each object until it determines that the code no longer needs that memory.
+
+An object will remain on the heap until it is no longer reachable, and it occurs when:
+
+- The object no longer has any references pointing to it
+- All references to the object have gone out of scope
+
+### Objects vs. References
+
+They are two different entities.
+
+The Reference is a variable that has a name and can be used to access the contents of an object. A reference can be assigned to another reference, passed to a method, or returned from a method. All references are the same size, no matter what their type is.
+
+An Object sits on the heap and does not have a name. Therefore, we have no way to access an object except through a reference. Objects come in all different shapes and sizes and consumed varying amounts of memory. They cannot be assigned to another object, cannot be passed to a method or returned from a method.
+
+It is the object that gets garbage collected, not its reference.
+
+```java
+public class Scope {
+  public static void main(String[] args) {
+    String one, two;
+    one = new String("a");
+    two = new String("b");
+    one = two;
+    String three = one;
+    one = null;
+  }
+}
+```
+
+Drawing Scope:
+
+```
+Reference -> Object
+one -> "a"
+two -> "b"
+
+---
+
+- one reassigned with the reference two ("b")
+- three points to what one is pointing now ("b")
+
+then:
+
+Reference -> Object
+one -> "b"
+two -> "b"
+three -> "b"
+
+---
+
+- one reassined with null
+
+then:
+
+Reference -> Object
+one -> null
+two -> "b"
+three -> "b"
+
+---
+
+"a" is not pointed by anyone, making him eligible for garbage collection.
+
+"b" doesn't go out of scope until the end of method.
+```
+
