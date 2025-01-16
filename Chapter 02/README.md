@@ -193,7 +193,7 @@ For example, `9 divided by 3 divides evenly and has no remainder` so, `9 % 3 is 
 
 On the other hand, `11 divided by 3 does not divide evenly` so, `11 % 3 is 2`.
 
-Division vs. Modulus:
+#### Division vs. Modulus:
 
 ```java
 System.out.println(9 / 3); // 3
@@ -214,3 +214,51 @@ For integer values, division results in the floor value of the nearest integer t
 `Floor value` means the value without anything after the decimal point.
 
 For example, the value 4 is the floor value for 4.0, 4.5 and 4.9999.
+
+### Numeric Promotion
+
+As shown in [Chapter 01 - Understanding Data Types](../Chapter%2001/README.md#understanding-data-types), each primitive numeric type has a bit-length.
+
+We don't need to know the exact size but keep in mind which one are bigger than the others.
+
+Java will follow these rules when applying operators to data types:
+
+#### Numeric Promotion Rules
+
+1. If two values have different data types, Java will automatically promote one of the values to the larger of the two data types
+2. If one of the values is integral and the other is floating-point, Java will automatically promote the integral value to the floating-point value's data type
+3. Smaller data types, such as `byte`, `short` and `char`, are first promoted to int any time they're used with a Java binary arithmetic operator, even if neither of the operands is int
+4. After all promotion has occurred and the operands have the same data type, the resulting value will have the same data type as its promoted operands
+
+Examples:
+
+- What is the data type of `x * y`?
+
+  ```java
+  int x = 1;
+  long y = 33;
+  var z = x * y;
+  ```
+
+  In this case will follow the first rule. Since one of the values is int and the other is long. Long is larger than int, then the int value x is first promoted to a long. The result z is then a long value.
+
+- What is the data type of `x * y`?
+
+  ```java
+  short x = 10;
+  short y = 3;
+  var z = x * y;
+  ```
+
+  In this case will follow the third rule. Both will be promoted to int before the multiplication, resulting in an output of type int.
+
+- What is the data type of `w * x / y`?
+
+  ```java
+  short w = 14;
+  float x = 13;
+  double y = 30;
+  var z = w * x / y;
+  ```
+
+  In this case the short w will be promoted to int. The promoted w will then be promoted to a float, so it can be multiplied with x. Then will be promoted to a double so that it can be divided by y, resulting in a double value.
