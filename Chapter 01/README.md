@@ -465,8 +465,8 @@ public class Chick {
 
 There are two key points to note:
 
-- the name of the constructor matches the name of the class
-- there's no return type
+- The name of the constructor matches the name of the class
+- There's no return type
 
 ```java
 public class Chick {
