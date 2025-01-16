@@ -1119,7 +1119,7 @@ public void eatMore(boolean hungry, int amountOfFood) {
 }
 ```
 
-Tracking scope by block
+Tracking scope by block.
 
 Starting from the innermost set, the table shows the line numbers that each block stars and ends on.
 
@@ -1207,7 +1207,7 @@ public class Scope {
 }
 ```
 
-Drawing Scope:
+#### Drawing Scope:
 
 ```
 Reference -> Object
