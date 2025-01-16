@@ -132,3 +132,85 @@ System.out.println(parkAttendance); // 1
 System.out.println(parkAttendance--); // 1
 System.out.println(parkAttendance); // 0
 ```
+
+## Working with Binary Arithmetic Operators
+
+Binary Operators are the most common operators in the Java language. They can be used to perform mathematical operations on variables, create logical expressions and perform basic variable assignments.
+
+### Arithmetic Operators
+
+Arithmetic operators are those that operate on numeric values.
+
+Operator | Example | Description
+--- | --- | ---
+Addition | a + b | Adds two numeric values
+Subtraction | c - d | Subtracts two numeric values
+Multiplication | e * f | Multiplies two numeric values
+Division | g / h | Divides one numeric value by another
+Modulus | i % j | Returns the remainder after division of one numeric value by another
+
+`Multiplicative operators (*, / and %)` have a `higher` order of precedence than the `additive operators (+ and -)`.
+
+```java
+int price = 2 * 5 + 3 * 4 - 8;
+
+// first we evaluate 2 * 5 and 3 * 4, reducing the expression to
+int price = 10 + 12 - 8;
+
+// then we evaluate the remaining terms in left-to-right order
+
+// resulting in a value of price of 14
+```
+
+### Adding Parentheses
+
+We can change the order of operation explicitly by wrapping parentheses around the sections we want to evaluate first.
+
+Changing the order of operation from the previous example:
+
+```java
+int price = 2 * ((5 + 3) * 4 - 8);
+
+// first we evaluate 5 + 3, reducing the expression to
+int price = 2 * (8 * 4 - 8);
+
+// and then we multiply 8 * 4, reducing the expression even more
+int price = 2 * (32 - 8);
+
+// next we subtract the values within the parentheses before applying the terms outside
+int price = 2 * 24;
+
+// finally we multiply 2 * 24
+
+// resulting in a value of 48 for price
+```
+
+### Division and Modulus Operators
+
+The modulus operator, sometimes called the `remainder operator`, is the remainder when two numbers are divided.
+
+For example, `9 divided by 3 divides evenly and has no remainder` so, `9 % 3 is 0`.
+
+On the other hand, `11 divided by 3 does not divide evenly` so, `11 % 3 is 2`.
+
+Division vs. Modulus:
+
+```java
+System.out.println(9 / 3); // 3
+System.out.println(9 % 3); // 0
+
+System.out.println(10 / 3); // 3
+System.out.println(10 % 3); // 1
+
+System.out.println(11 / 3); // 3
+System.out.println(11 % 3); // 2
+
+System.out.println(12 / 3); // 4
+System.out.println(12 % 3); // 0
+```
+
+For integer values, division results in the floor value of the nearest integer that fulfills the operation, whereas the modulus is the remainder value.
+
+`Floor value` means the value without anything after the decimal point.
+
+For example, the value 4 is the floor value for 4.0, 4.5 and 4.9999.
