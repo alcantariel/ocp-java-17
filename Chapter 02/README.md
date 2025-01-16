@@ -32,10 +32,10 @@ System.out.print("Zoo animal receives: " + reward + " reward points")
 ```
 
 Step by step given this example:
-- the first operation is to decrement cookies, resulting in 3
-- then the multiplication 3 * 2, resulting in 6
-- then the addition 6 + 3, resulting in 9
-- finally the result is automatically promoted from 9 to 9.0 and assigned to the reward
+1. The first operation is to decrement cookies, resulting in 3
+2. Then the multiplication 3 * 2, resulting in 6
+3. Then the addition 6 + 3, resulting in 9
+4. Finally the result is automatically promoted from 9 to 9.0 and assigned to the reward
 
 The final values of reward and cookies are 9.0 and 3, respectively, with the following printed:
 
@@ -53,9 +53,9 @@ Consider the following expression with some optional parentheses to demonstrate 
 var perimeter = ((2 * height) + (2 * length));
 ```
 
-- the multiplication operator (*) has a higher precedence than the addition operator (+)
-- the `height` and `length` are both multiplied by 2 before being added together
-- the assignment operator (=) has the lowest order of precedence, so is performed last
+- The multiplication operator (*) has a higher precedence than the addition operator (+)
+- The `height` and `length` are both multiplied by 2 before being added together
+- The assignment operator (=) has the lowest order of precedence, so is performed last
 
 ### Order of Operator Precedence
 
@@ -99,11 +99,11 @@ Cast | (String) i | Casts a value to a specific type
 
 ## Complement and Negation Operators
 
-`Logical Complement Operator (!)` flips the value of a boolean expression. [LogicalComplementOperatorExample.java](./LogicalComplementOperator.java)
+`Logical Complement Operator (!)` flips the value of a boolean expression. [LogicalComplementOperator.java](./LogicalComplementOperator.java)
 
-`Bitwise Complement Operator (~)` which flips all the 0s and 1s in a number. It can only be applied to integer numeric types such as byte, short, char, int and long. [BitwiseComplementOperatorExample.java](./BitwiseComplementOperator.java)
+`Bitwise Complement Operator (~)` which flips all the 0s and 1s in a number. It can only be applied to integer numeric types such as byte, short, char, int and long. [BitwiseComplementOperator.java](./BitwiseComplementOperator.java)
 
-`Negation Operator (-)` reverses the sign of a numeric expression. [NegationOperatorExample.java](./NegationOperatorExample.java)
+`Negation Operator (-)` reverses the sign of a numeric expression. [NegationOperator.java](./NegationOperator.java)
 
 ## Increment and Decrement Operators
 
@@ -262,3 +262,95 @@ Examples:
   ```
 
   In this case the short w will be promoted to int. The promoted w will then be promoted to a float, so it can be multiplied with x. Then will be promoted to a double so that it can be divided by y, resulting in a double value.
+
+## Assigning Values
+
+Compilation errors from assignment operators are often overlooked. To be successful with the assignment operators, we should understand how the compiler handles numeric promotion and when casting is required.
+
+### Assignment Operator
+
+An assignment operator is a binary operator that modifies, or assigns the variable on the left side of the operator with the result on the right side of the equation.
+
+The assignment operator is evaluated from right to left.
+
+The simplest assignment operator is the `=` assignment.
+
+`int herd = 1;`
+
+This statement assigns to the herd variable the value of 1.
+
+#### Simple Assignment Operator
+
+Operator | Example | Description
+--- | --- | ---
+Assignment | int a = 50; | Assigns the value on the right to the variable on the left
+
+### Casting Values
+
+Casting is a unary operation where one data type is explicitly interpreted as another data type.
+
+Casting is optional and `unnecessary` when converting to a `larger` data type, but is `required` when converting to a `smaller` data type.
+
+Without casting, the compiler will generate an error when trying to put a larger data type inside a smaller one.
+
+For example:
+
+```java
+int fur = (int) 5;
+int hair = (short) 2;
+String type = (String) "Bird";
+short tail = (short) (4 + 10);
+long feathers = 10 (long); // DOES NOT COMPILE
+```
+
+- Spaces between the cast and the value are optional
+- Since casting is a unary operation, it would only be applied to the 4 if we didn't enclose 4 + 10 in parentheses
+- The last example does not compile because the type is on the wrong side of the value
+
+Examples putting a larger value into a smaller data type:
+
+```java
+float egg = 2.0 / 9; // DOES NOT COMPILE
+int tadpole = (int) 5 * 2L; // DOES NOT COMPILE
+short frog = 3 - 2.0; // DOES NOT COMPILE
+```
+
+### Applying Casting
+
+See these examples trying to assign invalid values to the variables:
+
+```java
+int fish = 1.0; // DOES NOT COMPILE
+short bird = 1921222; // DOES NOT COMPILE
+int mammal = 9f; // DOES NOT COMPILE
+long reptile = 192_301_398_193_810_323; // DOES NOT COMPILE
+```
+
+- The first statement does not compile because we are trying to assign a double 1.0 to an integer variable
+- The second statement does not compile because the literal value 1921222 is outside the range of short
+- The third statement does not compile because the f added to the end of the number instructs the compiler to treat the number as floating-point value
+- The last statement does not compile because Java interprets the literal as an int and notices that the value is larger than int allows and would need a postfix L or l to be considered a long.
+
+It is possible to fix three of these previous examples by casting the results to a smaller data type.
+
+```java
+int fish = (int) 1.0;
+short bird = (short) 1921222; // stored as 20678
+int mammal = (int) 9f;
+```
+
+The last example does not work with casting because it is promoted to int and is out of range.
+
+So the following code fixes it without requiring casting:
+
+```java
+long reptile = 192_301_398_193_810_323L;
+```
+
+### Overflow and Underflow
+
+The second value of the previous example `1,921,222` is too large to be stored as a short, so numeric overflow occurs, and it becomes `20,678`.
+
+`Overflow` is when a number is so large to fit in the data type, so the system "wraps around" the lowest negative value and counts up from there. [Overflow.java](./Overflow.java)
+
+`Underflow` is when the number is too low to fit in the data type, so the system "wraps around" the highest positive value and counts up from there. [Underflow.java](./Underflow.java)
