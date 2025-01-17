@@ -4,7 +4,7 @@
 
 - [Chapter 01 - Building Blocks](./Chapter%2001/README.md)
 - [Chapter 02 - Operators](./Chapter%2002/README.md)
-- Chapter 03 - Making Decisions
+- [Chapter 03 - Making Decisions](./Chapter%2003/README.md)
 - Chapter 04 - Core APIs
 - Chapter 05 - Methods
 - Chapter 06 - Class Design
