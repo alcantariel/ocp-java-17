@@ -355,7 +355,7 @@ The second value of the previous example `1,921,222` is too large to be stored a
 
 `Underflow` is when the number is too low to fit in the data type, so the system "wraps around" the highest positive value and counts up from there. [Underflow.java](./Underflow.java)
 
-### Compound Assignment Operators```
+### Compound Assignment Operators
 
 Besides the simple assignment operator (=), Java supports numerous compound assignment operators.
 
@@ -418,3 +418,19 @@ The (wolf = 3) expression does two things.
 
 1. It sets the value of the variable wolf to be 3
 2. It returns the value of the assignment, which is also 3
+
+## Comparing Values
+
+They can be used check if two values are the same, less than or greater than and perform Boolean arithmetic.
+
+### Equality Operators
+
+Determining equality in Java can be a nontrivial endeavor as there's a semantic difference between `two objects are the same` and `two objects are equivalent`.
+
+#### Equality Operators
+
+Operator | Example | Apply to Primitives | Apply to Objects
+--- | --- | --- | ---
+Equality | a == 10 | Returns true if the two values represent the same value | Returns true if the two values reference the same object
+Inequality | b != 3.14 | Returns true if the two values represent different values | Returns true if the two values do not reference the same object
+
