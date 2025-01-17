@@ -354,3 +354,67 @@ The second value of the previous example `1,921,222` is too large to be stored a
 `Overflow` is when a number is so large to fit in the data type, so the system "wraps around" the lowest negative value and counts up from there. [Overflow.java](./Overflow.java)
 
 `Underflow` is when the number is too low to fit in the data type, so the system "wraps around" the highest positive value and counts up from there. [Underflow.java](./Underflow.java)
+
+### Compound Assignment Operators```
+
+Besides the simple assignment operator (=), Java supports numerous compound assignment operators.
+
+#### Compound Assignment Operators
+
+Operator | Example | Description
+--- | --- | ---
+Addition assignment | a += 5 | Adds the value on the right to the variable on the left and assigns the sum to the variable
+Subtraction assignment | b -= 0.2 | Subtracts the value on the right from the variable on the left and assigns the difference to the variable
+Multiplication assignment | c *= 100 | Multiplies the value on the right with the variable on the left and assigns the product to the variable
+Division assignment | d /= 4 | Divides the variable on the left by the value on the right and assigns the quotient to the variable
+
+#### Simple vs. Compound
+
+```java
+int camel = 2;
+int giraffe = 3;
+
+camel = camel * giraffe; // simple assignment operator
+camel *= giraffe; // compound assignment operator
+```
+
+Compound operators can also implicitly cast a value.
+
+For example:
+
+```java
+long goat = 10;
+int sheep = 5;
+
+sheep = sheep * goat; // DOES NOT COMPILE
+```
+
+This does not compile because we are trying to assign a long value to an int variable.
+
+```java
+long goat = 10;
+int sheep = 5;
+
+sheep *= goat; // WORKS
+```
+
+But using the compound operator works because it will first cast sheep to a long, apply the multiplication and then cast the result to an int.
+
+### Return Value of Assignment Operators
+
+The result of an assignment is an expression in and of itself equal to the value of the assignment.
+
+For example:
+
+```java
+long wolf = 5;
+long coyote = (wolf = 3);
+
+System.out.println(wolf); // 3
+System.out.println(coyote); // 3
+```
+
+The (wolf = 3) expression does two things.
+
+1. It sets the value of the variable wolf to be 3
+2. It returns the value of the assignment, which is also 3
