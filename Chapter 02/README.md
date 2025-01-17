@@ -654,9 +654,11 @@ The most common example of using the conditional operator is checking for null o
 In the following example, if duck is null, the program will throw a NullPointerException at runtime:
 
 ```java
-if (duck != null && duckgetAge() < 5) { // could throw a NullPointerException
+if (duck != null && duck.getAge() < 5) { // could throw a NullPointerException
   // do something
 }
 ```
 
 If duck is null, the conditional prevents a NullPointerException from being thrown, since the evaluation of `duck.getAge() < 5` is never reached.
+
+## Making Decisions with the Ternary Operator
