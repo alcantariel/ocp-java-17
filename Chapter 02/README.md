@@ -434,3 +434,229 @@ Operator | Example | Apply to Primitives | Apply to Objects
 Equality | a == 10 | Returns true if the two values represent the same value | Returns true if the two values reference the same object
 Inequality | b != 3.14 | Returns true if the two values represent different values | Returns true if the two values do not reference the same object
 
+The equality operator can be applied to numeric values, boolean values and objects.
+
+It's not possible to mix these types, for example:
+
+```java
+boolean monkey = true == 3; // DOES NOT COMPILE
+boolean ape = false != "Grape"; // DOES NOT COMPILE
+```
+
+For object comparison, the equality operator is applied to the references.
+
+Two references are equal if and only if they point to the same object or both point to null.
+
+For example:
+
+```java
+var monday = new File("schedule.txt");
+var tuesday = new File("schedule.txt");
+var wednesday = tuesday;
+
+System.out.println(monday == tuesday); // false
+System.out.println(tuesday == wednesday); // true
+```
+
+Even though all the variables point to the same file information, only two references, tuesday and wednesday are equal in terms of == since they point to the same object.
+
+### Relational Operators
+
+They compare two expressions and return a boolean value.
+
+#### Relational Operators
+Operator | Example | Description
+--- | --- | ---
+Less than | a < 5 | Returns true if the value on the left is strictly less than the value on the right
+Less than or equal to | b <= 6 | Returns true if the value on the left is less than or equal to the value on the right
+Greater than | c > 9 | Returns true if the value on the left is strictly greater than the value on the right
+Greater than or equal to | d >= 3 | Returns true if the value on the left is greater than or equal to the value on the right
+Type comparison | e instanceof String | Returns true if the reference on the left side is an instance of the type on the right side (class, interface, record, enum, annotation)
+
+### Numeric Comparison Operators
+
+These last operators apply only to numeric values. If the two numeric operands are not of the same data type, the smaller is promoted.
+
+For example:
+
+```java
+int gibbonNumFeet = 2;
+int wolfNumFeet = 4;
+int ostrichNumFeet = 2;
+
+System.out.println(gibbonNumFeet < wolfNumFeet); // true
+System.out.println(gibbonNumFeet <= wolfNumFeet); // true
+System.out.println(gibbonNumFeet >= ostrichNumFeet); // true
+System.out.println(gibbonNumFeet > ostrichNumFeet); // false
+```
+
+### instanceof Operator
+
+It is useful for determining whether an object is a member of a particular class or interface at runtime.
+
+But why I wouldn't know what class or interface an object is?
+
+It's because Java supports polymorphism and for now all we need to know is that objects can be passed around using a variety of references. For example, all classes inherit from `java.lang.Object`.
+
+This means that any instance can be assigned to an Object reference.
+
+For example:
+
+```java
+Integer zooTime = Integer.valueOf(9);
+Number num = zooTime;
+Object obj = zooTime;
+```
+
+In this example, only one object is created in memory, but there are three different references to it because Integer inherits both Number and Object.
+
+#### null and the instanceof operator
+
+Calling instanceof on the null literal or a null reference always returns false.
+
+```java
+System.out.println(null instanceof Object); // false
+```
+
+```java
+Object noObject = null;
+System.out.println(noObject instanceof String); // false
+```
+
+null cannot be used on the right side of the instanceof as it will cause a compilation error.
+
+```java
+System.out.println(null instanceof null); // DOES NOT COMPILE
+```
+
+### Logical Operators
+
+The logical operators `|`, `&` and `^`, may be applied to both, numeric and boolean data types.
+
+When they're applied to `boolean` data types, are referred to as `logical operators`.
+
+When they're applied to `numeric` data types, are referred to as `bitwise operators`, as they perform bitwise comparisons of the bits that compose the number.
+
+#### Logical Operators
+Operator | Example | Description
+--- | --- | ---
+Logical AND | a & b | Value is true only if both values are true
+Logical inclusive OR | c \| d | Value is true if at least one of the values is true
+Logical exclusive OR | e ^ f | Value is true only if one value is true and the other is false
+
+#### Truth Table for AND (x & y)
+
+<table>
+  <tr>
+    <td></td>
+    <td>y = true</td>
+    <td>y = false</td>
+  </tr>
+  <tr>
+    <td>x = true</td>
+    <td>true</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>x = false</td>
+    <td>false</td>
+    <td>false</td>
+  </tr>
+</table>
+
+#### Truth Table for Inclusive OR (x | y)
+
+<table>
+  <tr>
+    <td></td>
+    <td>y = true</td>
+    <td>y = false</td>
+  </tr>
+  <tr>
+    <td>x = true</td>
+    <td>true</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>x = false</td>
+    <td>true</td>
+    <td>false</td>
+  </tr>
+</table>
+
+#### Truth Table for Exclusive OR (x ^ y)
+
+<table>
+  <tr>
+    <td></td>
+    <td>y = true</td>
+    <td>y = false</td>
+  </tr>
+  <tr>
+    <td>x = true</td>
+    <td>false</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>x = false</td>
+    <td>true</td>
+    <td>false</td>
+  </tr>
+</table>
+
+- AND is only true if both operands are true
+- Inclusive OR is only false if both operands are false
+- Exclusive OR is only true if the operands are different
+
+For example:
+
+```java
+boolean eyesClosed = true;
+boolean breathingSlowly = true;
+
+boolean resting = eyesClosed | breathingSlowly;
+boolean asleep = eyesClosed & breathingSlowly;
+boolean awake = eyesClosed ^ breathingSlowly;
+
+System.out.println(resting); // true
+System.out.println(asleep); // true
+System.out.println(awake); // false
+```
+
+### Conditional Operators
+
+The conditional operators are `&&` and `||`.
+
+#### Conditional Operators
+
+Operator | Example | Description
+--- | --- | ---
+Conditional AND | a && b | Value is true only if both values are true. If the left side is false, then the right side will not be evaluated
+Conditional OR | c \|\| d | Value is true if at least one of the values is true. If the left side is true, then the right side will not be evaluated
+
+The conditional operators, often called short-circuit operators are nearly identical to the logical operators, except that the right side may never be evaluated if the final result can be determined by the left side.
+
+For example:
+
+```java
+int hour = 10;
+boolean zooOpen = true || (hour < 4);
+
+System.out.println(zooOpen); // true
+```
+
+Since we know the left side is true, there's no need to evaluate the right side.
+
+### Avoiding a NullPointerException
+
+The most common example of using the conditional operator is checking for null objects before performing an operation.
+
+In the following example, if duck is null, the program will throw a NullPointerException at runtime:
+
+```java
+if (duck != null && duckgetAge() < 5) { // could throw a NullPointerException
+  // do something
+}
+```
+
+If duck is null, the conditional prevents a NullPointerException from being thrown, since the evaluation of `duck.getAge() < 5` is never reached.
