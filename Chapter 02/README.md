@@ -662,3 +662,42 @@ if (duck != null && duck.getAge() < 5) { // could throw a NullPointerException
 If duck is null, the conditional prevents a NullPointerException from being thrown, since the evaluation of `duck.getAge() < 5` is never reached.
 
 ## Making Decisions with the Ternary Operator
+
+The ternary operator is a conditional operator that has the following form:
+
+`boolean expression ? expression1 : expression2;`
+
+The first operand must be a boolean expression, and the second and third can be any expression that returns a value.
+
+The ternary operator is a condensed form of a combined if and else statement that returns a value.
+
+Example using if/else:
+
+```java
+int owl = 5;
+int food;
+
+if (owl < 2) {
+  food = 3;
+} else {
+  food = 4;
+}
+
+System.out.println(food); // 4
+```
+
+The same example using ternary operator:
+```java
+int owl = 5;
+int food = owl < 2 ? 3 : 4;
+
+System.out.println(food); // 4
+```
+
+These two code snippets are equivalent.
+
+Parentheses can be added to expressions to improve readability, especially when multiple ternary operators are used together, for example:
+
+```java
+int food = (owl < 4 ? ((owl > 2) ? 3 : 4) : 5);
+```
