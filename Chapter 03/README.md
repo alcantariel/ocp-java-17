@@ -179,7 +179,7 @@ The variable `data` in this example is referred to as the `pattern variable`.
 
 Notice that this code also avoids any potential ClassCastException.
 
-### Reassign Pattern Variables
+#### Reassign Pattern Variables
 
 While possible, it is a bad practice to reassign a pattern variable since doing so can lead to ambiguity about what is and is not in scope.
 
@@ -197,7 +197,7 @@ if (number instanceof final Integer data) {
 }
 ```
 
-### Pattern Variables and Expressions
+#### Pattern Variables and Expressions
 
 Pattern matching includes expressions that can be used to filter data out, such as in the following example:
 
@@ -210,3 +210,254 @@ void printIntegerGreaterThan5(Number number) {
 ```
 
 Notice that we're using the pattern variable in an expression in the same line in which it is declared.
+
+#### Subtypes
+
+The type of the pattern variable must be a subtype of the variable on the left side of the expression.
+
+It also cannot be the same type.
+
+This rule does not exist for traditional instanceof operator expressions.
+
+```java
+Integer value = 123;
+
+if (value instanceof Integer) {}
+
+if (value instanceof Integer data) {} // DOES NOT COMPILE
+```
+
+`The pattern variable should be a strict subtype of Integer.`
+
+#### Flow Scoping
+
+The compiler applies flow scoping when working with pattern matching.
+
+Flow scoping means the variable is only in scope when the compiler can definitively determine its type.
+
+Flow scoping is unlike any other type of scoping in that it is not strictly hierarchical like instance, class or local scoping.
+
+```java
+void printIntegerTwice(Number number) {
+  if (number instanceof Integer data) {
+    System.out.println(data.intValue());
+  }
+
+  System.out.println(data.intValue()); // DOES NOT COMPILE
+}
+```
+
+## Applying switch Statements
+
+What if we have a lot of possible branches or paths for a single value?
+
+For example, print a different message based on the day of the week.
+
+We could combine seven if or else statements, but that tends to create code that is long, difficult to read and hard to maintain.
+
+### The switch Statement
+
+A switch statement is a complex decision-making structure in which a single value is evaluated and flow is redirected to the first matching branch, knows as a `case` statement.
+
+If no such case statement is found that matches the value, an optional `default` statement will be called if provided.
+
+If no such default option is available, the entire switch will be skipped.
+
+#### The structure of a switch statement
+
+```java
+switch (variableToTest) {
+  case constantExpresion:
+    // branch for case
+    break;
+  case constantExpression2, constantExpression3:
+    // branch for case2 and case3
+    break;
+  default:
+    // branch for default
+}
+```
+
+1. switch keyword
+2. Parentheses (required)
+3. case scenarios
+4. Optional break
+5. Optional default as fallback
+
+Going back to our example and using switch to print the days of week.
+
+```java
+void printDayOfWeek(int day) {
+  switch (day) {
+    case 0:
+      System.out.println("Sunday");
+      break;
+    case 1:
+      System.out.println("Monday");
+      break;
+    case 2:
+      System.out.println("Tuesday");
+      break;
+    case 3:
+      System.out.println("Wednesday");
+      break;
+    case 4:
+      System.out.println("Thursday");
+      break;
+    case 5:
+      System.out.println("Friday");
+      break;
+    case 6:
+      System.out.println("Saturday");
+      break;
+    default:
+      System.out.println("Invalid value");
+  }
+}
+```
+
+#### Exiting with break Statements
+
+A break statement terminates the switch statement and returns flow control to the enclosing process.
+
+`It ends the switch statement immediately.`
+
+The break statements are optional, but without them the code will execute every branch following a matching case statement, including any default statement it finds.
+
+#### Selecting switch Data Types
+
+The following is a list of all data types supported by switch statements:
+
+- int and Integer
+- byte and Byte
+- short and Short
+- char and Character
+- String
+- enum values
+- var (if the type resolves to one of the preceding types)
+
+The types `boolean`, `long`, `float` and `double` are excluded as are their associated `Boolean`, `Long`, `Float` and `Double` classes.
+
+The reasons are varied, such as `boolean having too small range of values` and `floating-point numbers having quite a wide range of values`.
+
+#### Determining Acceptable Case Values
+
+Not just any variable or value can be used in a case statement.
+
+First, the values in each case statement must be compile-time constant values of the same data type as the switch value. This means you can use only literals, enum constants or final constant variables of the same data type.
+
+We can't have a case statement value that requires executing a method at runtime, for example:
+
+```java
+int getCookie() {
+  return 4;
+}
+
+void feedAnimals() {
+  final int bananas = 1;
+  int apples = 2;
+  int numberOfAnimals = 3;
+  final int cookies = getCookies();
+
+  switch (numberOfAnimals) {
+    case bananas:
+    case apples: // DOES NOT COMPILE
+    case getCookie(): // DOES NOT COMPILE
+    case cookies: // DOES NOT COMPILE
+    case 3 * 5:
+  }
+}
+```
+
+1. The bananas variable is marked final and its value is knows at compile-time, so it is valid
+2. The apples variable is not marked final, even though its value is knows, so it is not permitted
+3. The values getCookies() and cookies do not compile because methods are not evaluated until runtime, so they cannot be used as the value of a case statement
+4. The value 3 * 5 does compile as expressions are allowed as case values, provided the value can be resolved at compile-time
+
+#### The switch Expression
+
+Out implementation of `printDayOfWeek` is quite long. That there was a lot of boilerplate code with numerous break statements.
+
+There is a new switch expression added to Java 14 that is more compact.
+
+The switch expression supports two types of branches, expression and a block.
+
+#### The structure of a switch expression
+
+```java
+int result = switch (variableToTest) {
+  case constantExpression -> 5;
+  case constantExpression2, constantExpression3 -> {
+    yield 10;
+  }
+  default -> 20;
+}
+```
+
+1. The assignment to the variable result is optional
+2. switch keyword
+3. Parentheses (required)
+4. case expressions followed by the arrow operator (required)
+5. yield required for case block if switch returns a value
+6. default branch is required if all possible case statement values are not handled
+
+Rewriting the previous `printDayOfWeek`:
+
+```java
+void printDayOfWeek(int day) {
+  var result = switch (day) {
+    case 0 -> "Sunday";
+    case 1 -> "Monday";
+    case 2 -> "Tuesday";
+    case 3 -> "Wednesday";
+    case 4 -> "Thursday";
+    case 5 -> "Friday";
+    case 6 -> "Saturday";
+    default -> "Invalid value";
+  };
+
+  System.out.println(result);
+}
+```
+
+There are some new rules:
+
+1. All the branches of a switch expression that do not throw an exception must return a consistent data type (if the switch expression returns a value)
+2. If the switch expression return a value, then every branch that is not an expression must yield a value
+3. A default branch is required unless all cases are covered or no value is returned
+
+### Examples covering these rules
+
+#### Returning Consistent Data Types
+
+You can't return incompatible or random data types. [ReturningConsistentDataTypes.java](./ReturningConsistentDataTypes.java)
+
+#### Applying a case Block
+
+A switch expression supports both an expression and a block. It also includes a yield statement if the switch expression returns a value. [ApplyingCaseBlock.java](./ApplyingCaseBlock.java)
+
+#### Covering All Possible Values
+
+A switch expression that returns a value must handle all possible input values.
+
+```java
+int canis = 4;
+String type = switch (canis) { // DOES NOT COMPILE
+  case 1 -> "dog";
+  case 2 -> "wolf";
+  case 3 -> "coyote";
+};
+```
+
+There's no case branch to cover 4, 5, etc...
+
+But there are two ways to address this:
+
+- Add a default branch
+- If the switch expression takes an enum value, add a case branch for every possible enum value
+
+For example: [CoveringAllPossibleValues.java](./CoveringAllPossibleValues.java)
+
+Since all possible permutations of Season are covered, a default branch is not required.
+
+## Writing while Loops
