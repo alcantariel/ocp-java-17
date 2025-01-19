@@ -1243,4 +1243,3 @@ three -> "b"
 
 "b" doesn't go out of scope until the end of method.
 ```
-
