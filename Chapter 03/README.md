@@ -577,3 +577,174 @@ There are two types of for loops, although both use the same for keyword.
 The first is referred to as the `basic` for loop, and the second is often called the `enhanced` for loop.
 
 ### The for Loop
+
+A basic for loop ha the same conditional boolean expression and block of statements, as the while loops.
+
+#### The structure of a basic for loop
+
+```java
+for (initialization; booleanExpression; updateStatement) {
+  // body
+}
+```
+
+1. Initialization statement executes
+2. If booleanExpression is true, continue, else exit loop
+3. Body executes
+4. Execute updateStatement
+5. Return to Step 2
+
+The organization of the components and flow allow us to create extremely powerful statements in a single line that otherwise would take multiple lines with a while loop.
+
+Each of the three sections is separated by a semicolon `;`.
+
+Variables declared in the initialization block of a for loop have limited scope and are accessible only within the for loop.
+
+```java
+for (int i = 0; i < 10; i++) {
+  System.out.println("Value is " + i);
+}
+
+System.out.println(i); // DOES NOT COMPILE
+```
+
+Alternatively, variables declared before the for loop and assigned a value in the initialization block or in the body may be used outside the for loop.
+
+```java
+int i;
+
+for (i = 0; i < 10; i++) {
+  System.out.println("Value is " + i);
+}
+
+System.out.println(i); // 10
+```
+
+#### Printing Elements in Reverse
+
+```java
+for (var counter = 4; counter >= 0; counter--) {
+  System.out.println(counter);
+}
+```
+
+### Working with for Loops
+
+#### Creating an Infinite Loop:
+
+```java
+for (;;) {
+  System.out.println("Hello World");
+}
+```
+
+Although this for loop may look like it does not compile, it will in fact compile and run without issue. It is actually an infinite loop.
+
+Note that the semicolons separating the three sections are required.
+
+#### Adding Multiple Terms to the for Statement
+
+```java
+int x = 0;
+
+for (long y = 0, z = 4; x < 5 && y < 10; x++, y++) {
+  System.out.println(y);
+}
+
+System.out.println(x);
+```
+
+This code demonstrates three variations of the for loop.
+
+1. It is possible to declare a variable, such as x, before the loop begins
+2. The initialization block, boolean expression and update statements can include extra variables that may or may not reference each other, such as z, that is defined in the initialization block and is never used
+3. The update statement can modify multiple variables
+
+#### Redeclaring a Variable in the Initialization Block
+
+```java
+int x = 0;
+
+for (int x = 4; x < 5; x++) { // DOES NOT COMPILE
+  System.out.println(x);
+}
+```
+
+This example looks similar to the previous, but it does not compile because of the initialization block.
+
+The difference is that x is repeated in the initialization block after already being declared before the loop.
+
+#### Using Incompatible Data Type in the Initialization Block
+
+```java
+int x = 0;
+
+for (long y = 0; int z = 4; x < 5; x++) { // DOES NOT COMPILE
+  System.out.println(y);
+}
+```
+
+This code will not compile. The variables in the initialization block must all be of the same type.
+
+#### Modifying Loop Variables
+
+```java
+for (int i = 0; i < 10; i++) {
+  i++;
+}
+```
+
+As a general rule is considered a bad practice to modify loop variables due to the unpredictability of the result.
+
+It also tends to make code difficult for other people to follow.
+
+### The for-each Loop
+
+The for-each loop is a specialized structure design to iterate over arrays and various Collections Framework classes.
+
+#### The structure of an enhanced for-each loop
+
+```java
+for (datatype instance : collection) {
+  // body
+}
+```
+
+1. for keyword
+2. instance is the object to be iterated
+3. collection is the array that will be traversed
+
+The `right side` of the for-each loop must be:
+
+- A built-in Java array
+- An object whose type implements `java.lang.Iterable`. In other words, the right side must be an array or collection of items, such as a List or a Set.
+
+The `left side` of the for-each loop must include a declaration for an instance of a variable whose type is compatible with the type of the array or collection on the right side. On each iteration of the loop, the named variable on the left side is assigned a new value from the array or collection.
+
+#### for vs. for-each
+
+```java
+// for
+
+public void printNames(String[] names) {
+  for (int counter = 0; counter < names.length; counter++) {
+    System.out.println(names[counter]);
+  }
+}
+```
+
+```java
+// for-each
+
+public void printNames(String[] names) {
+  for (var name : names) {
+    System.out.println(name);
+  }
+}
+```
+
+The for-each loop is a lot shorter.
+
+We no longer have a counter loop variable that we need to create, increment and monitor.
+
+## Controlling Flow with Branching
