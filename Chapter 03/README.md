@@ -461,3 +461,119 @@ For example: [CoveringAllPossibleValues.java](./CoveringAllPossibleValues.java)
 Since all possible permutations of Season are covered, a default branch is not required.
 
 ## Writing while Loops
+
+A common practice when writing software is doing the same task some number of times.
+
+A loop is a repetitive control structure that can execute a statement of code multiple times in succession.
+
+The following loop executes exactly 10 times:
+
+```java
+int counter = 0;
+
+while (counter < 10) {
+  double price = counter * 10;
+  System.out.println(price);
+  counter++;
+}
+```
+
+### The while Statement
+
+The simplest repetitive control structure in java is the while statement.
+
+Like all repetition control structures, it has a termination condition, implemented as a boolean expression, that will continue as long the expression evaluates to true.
+
+#### The structure of a while statement
+
+```java
+while (booleanExpression) {
+  // body
+}
+```
+
+1. while keyword
+2. Parentheses (required)
+
+A while loop is similar to an if statement in that it is composed of a boolean expression and a block of statements.
+
+During execution, the boolean expression is evaluated before each iteration of the loop and exits if the evaluation return false.
+
+```java
+int roomInBelly = 5;
+
+void eatCheese(int bitesOfCheese) {
+  while (bitesOfCheese > 0 && roomInBelly > 0) {
+    bitesOfCheese--;
+    roomInBelly--;
+  }
+
+  System.out.println(bitesOfCheese + " pieces of cheese left");
+}
+```
+
+This method takes an amount of cheese and continues until has no room in belly.
+
+### The do/while Statement
+
+Another form to do loops is called do/while loop.
+
+#### The structure of a do/while
+
+```java
+do {
+  // body
+} while (booleanExpression);
+```
+
+1. do keyword
+2. while keyword followed by a boolean expression
+3. Parentheses (required)
+4. Semicolon (required)
+
+Unlike a while loop, a `do/while loop guarantees that the block will be executed at least once`.
+
+```java
+int lizard = 0;
+
+do {
+  lizard++;
+} while (false);
+
+System.out.println(lizard); // 1
+```
+
+The block will be executed and then check the loop condition.
+
+### Infinite Loops
+
+The most important thing when using any repetition control structure is to `make sure they always terminate`.
+
+`Failure to terminate a loop can lead to numerous problems, including overflow exception, memory leaks, slow performance and even bad data.`
+
+For example:
+
+```java
+int pen = 2;
+int pigs = 5;
+
+while (pen < 10) {
+  pigs++;
+}
+```
+
+The problem with this while statement is that it will never end since the variable pen is never modified and will always evaluate to true.
+
+`This is referred to as infinite loop because the termination condition is never reached.`
+
+So make sure that the loop condition, or the variables the condition is dependent, are changing between executions. Then ensure that the termination condition will be eventually reached in all circumstances.
+
+A loop can also exit under other conditions, such as a break statement.
+
+## Constructing for Loops
+
+There are two types of for loops, although both use the same for keyword.
+
+The first is referred to as the `basic` for loop, and the second is often called the `enhanced` for loop.
+
+### The for Loop
