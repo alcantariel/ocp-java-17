@@ -748,3 +748,223 @@ The for-each loop is a lot shorter.
 We no longer have a counter loop variable that we need to create, increment and monitor.
 
 ## Controlling Flow with Branching
+
+We have been dealing with single loops that ended only when their boolean expression evaluated to false.
+
+We will see now other ways loops could end or branch.
+
+### Nested Loops
+
+A nested loop is a loop that contains another loop, including while, do/while, for and for-each loops.
+
+For example, consider the following code that iterates over a two-dimensional array, which is and array that contains other arrays.
+
+[NestedLoopUsingTwoDimensionalArray.java](./NestedLoopUsingTwoDimensionalArray.java)
+
+```java
+int[][] myComplexArray = { { 5, 2, 1, 3 }, { 3, 9, 8, 9 }, { 5, 7, 12, 7 } };
+
+for (int[] mySimpleArray : myComplexArray) {
+  for (int i = 0; i < mySimpleArray.length; i++) {
+    System.out.println(mySimpleArray[i]);
+  }
+}
+```
+
+The outer loop will execute three times. Each time the outer loop executes, the inner loop is executed four times, giving the following output:
+
+```
+5    2    1    3
+3    9    8    9
+5    7    12   7
+```
+
+Nested loops also can include while and do/while, for example:
+
+[NestedWhileAndDoWhile.java](./NestedWhileAndDoWhile.java)
+
+```java
+int hungryHippopotamus = 8;
+
+while (hungryHippopotamus > 0) {
+  do {
+    hungryHippopotamus -= 2;
+  } while (hungryHippopotamus > 5);
+
+  hungryHippopotamus--;
+
+  System.out.println(hungryHippopotamus);
+}
+```
+
+1. The first iteration of the while, the inner loop repeats until the value of hungryHippopotamus is 4
+2. Leaving the do/while, the hungryHippopotamus will be decremented to 3
+3. 3 will be printed
+4. The next iteration of the while, the do will be executed, since the do/while always execute once, causing hungryHippopotamus to have the value 1
+5. Leaving the do/while, the hungryHippopotamus will be decremented to 0
+6. 0 will be printed
+7. Exit the while
+
+Giving the following output:
+
+```
+3
+0
+```
+
+### Adding Optional Labels
+
+A label is an optional pointer to the head of a statement that allows the application flow to jump to it or break from it.
+
+It is a single identifier that is followed by a colon `:`, for example:
+
+```java
+int[][] myComplexArray = { { 5, 2, 1, 3 }, { 3, 9, 8, 9 }, { 5, 7, 12, 7 } };
+
+OUTER_LOOP: for (int[] mySimpleArray : myComplexArray) {
+  INNER_LOOP: for (int i = 0; i < mySimpleArray.length; i++) {
+    System.out.println(mySimpleArray[i]);
+  }
+}
+```
+
+For readability, they are commonly expressed using uppercase letters in snake_case.
+
+When dealing with only one loop, labels do not add any value, but can be extremely useful in nested structures.
+
+### The break Statement
+
+A break statement transfers the flow of control out to the enclosing statement.
+
+####  The structure of a break statement
+
+```java
+OPTIONAL_LABEL: while (booleanExpression) {
+  // body
+
+  // somewhere in the loop
+
+  break OPTIONAL_LABEL;
+}
+```
+
+1. OPTIONAL_LABEL keyword followed by colon (required if label is present)
+2. while keyword followed by the booleanExpression
+3. Parentheses (required)
+4. body and some inner loop
+5. break keyword
+
+Notice that the break statement can take an optional label parameter.
+
+Without a label parameter, the break will terminate the nearest inner loop is currently in the process of executing.
+
+The optional label parameter allows us to break out of a higher-level outer loop.
+
+For example: [UsingBreakWithLabels.java](./UsingBreakWithLabels.java)
+
+### The continue Statement
+
+The continue statement causes flow to finish the execution of the current loop iteration.
+
+#### The structure of a continue statement
+
+```java
+OPTIONAL_LABEL: while (booleanExpression) {
+  // body
+
+  // somewhere in the loop
+
+  continue OPTIONAL_LABEL;
+}
+```
+
+1. OPTIONAL_LABEL keyword followed by colon (required if label is present)
+2. while keyword followed by the booleanExpression
+3. Parentheses (required)
+4. body and some inner loop
+5. continue keyword
+
+Notice that continue and break statements are mirrors. In fact, the statements are identical in how they are used but with different results.
+
+While the `break statement` transfers control to the enclosing statement, the `continue statement` transfers control to the booleanExpression that determines if the loop should continue. In other words, it ends the current iteration of the loop.
+
+For example: [CleaningSchedule.java](./CleaningSchedule.java)
+
+With the structure as defined, the loop will return control to the parent loop any time the first value is b or the second value is 2.
+
+The following is printed:
+
+```
+Cleaning: a, 1
+Cleaning: c, 1
+Cleaning: d, 1
+```
+
+### The return Statement
+
+The return statement can be used as an alternative to using labels and break statements, for example: [FindInMatrixUsingReturn.java](./FindInMatrixUsingReturn.java)
+
+This class is functionally the same as the first class we made earlier using break.
+
+We find code without labels and break statements a lot easier to read and debug. Also, making the search logic an independent function makes the code more reusable and the calling `main()` method a lot easier to read.
+
+### Unreachable Code
+
+One facet of `break`, `continue` and `return` that we should be aware of is that `any code placed immediately after them in the same block is considered unreachable and will not compile`, for example:
+
+```java
+int checkDate = 0;
+
+while (checkDate < 10> {
+  checkDate++;
+
+  if (checkDate < 100> {
+    break;
+    checkDate++; // DOES NOT COMPILE
+  })
+})
+```
+
+Even though it is not logically possible for the if statement to evaluate to true in this code, the compiler notices that we have statements immediately following the break and will fail to compile with "unreachable code" as the reason. The same will occur for continue and return statements.
+
+### Reviewing Branching
+
+#### Control statement usage
+
+<table>
+  <tr>
+    <td></td>
+    <td><b>Support labels</b></td>
+    <td><b>Support break</b></td>
+    <td><b>Support continue</b></td>
+    <td><b>Support yield</b></td>
+  </tr>
+  <tr>
+    <td><b>while</b></td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td><b>do/while</b></td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td><b>for</b></td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td><b>switch</b></td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+</table>
