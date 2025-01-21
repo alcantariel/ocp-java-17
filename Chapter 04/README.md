@@ -490,7 +490,7 @@ System.out.println(String.format("Hello %s, order %d is ready", name, orderId));
 System.out.println("Hello %s, order %d is ready".formatted(name, orderId));
 ```
 
-In the `format()` and `formatted()` operations, the parameters are inserted and formatted via symbols in the order that they are provided in the vararg.
+In the `format()` and `formatted()` operations, the parameters are inserted and formatted via symbols in the order that they are provided in the `vararg`.
 
 #### Common formatting symbols
 
@@ -526,4 +526,110 @@ System.out.println(result); // AnimAl
 
 Both snippets are equivalent. It also creates four String objects and outputs the same result.
 
-To read code that uses method chaining, start at left and evaluated the first method. Then call the next method on the returned value and go on.
+To read code that uses method chaining, start at left and evaluated the first method. Then call the next method on the returned value, and so on.
+
+## Using the StringBuilder Class
+
+A small program can create a lot of String objects very quickly. For example:
+
+```java
+String alpha = "";
+
+for (char current = 'a'; current <= 'z'; current++) {
+  alpha += current;
+}
+
+System.out.println(alpha);
+```
+
+The following code creates a total of 27 objects are instantiated, since each concatenation creates a new String.
+
+1. The empty String `alpha` is created
+2. Then in the loop, appends an `"a"`, and the `""` object becomes eligible for garbage collection
+3. The next time through the loop, alpha is assigned a new String object `"ab"`, and the `"a"` object becomes eligible for garbage collection, and so on
+
+This is very inefficient, and Java has a solution. The StringBuilder class creates a String without storing all those values, but unlike the String class, the StringBuilder is not immutable.
+
+```java
+StringBuilder alpha = new StringBuilder();
+
+for (char current = 'a'; current <= 'z'; current++) {
+  alpha.append(current);
+}
+
+System.out.println(alpha);
+```
+
+1. The StringBuilder object is instantiated
+2. The call to `append()` adds a character to the StringBuilder object each time through the for loop, without creating a new String object in every iteration
+
+#### Creating a StringBuilder
+
+There are three ways to construct a StringBuilder:
+
+```java
+StringBuilder sb1 = new StringBuilder();
+StringBuilder sb2 = new StringBuilder("animal");
+StringBuilder sb3 = new StringBuilder(10);
+```
+
+1. Create a StringBuilder containing an empty sequence of characters
+2. Create a StringBuilder containing a specific value
+3. Tells Java that we have some idea of how big the eventual value will be and would like the StringBuilder to reserve a certain capacity or number of slots for characters
+
+#### The String Pool
+
+Since strings are everywhere in Java, they use up a lot of memory.
+
+If Java realizes that many strings repeat in the program, he solves this issue by reusing common ones.
+
+The string pool, also knows as the intern pool, is a location in the Java Virtual Machine (JVM) that collects all these strings.
+
+The string pool contains literal values and constants that appear in our program.
+
+For example, `"name"` is a literal and therefore goes into the string pool. The `myObject.toString()` method returns a string but not a literal, so it does not go into the string pool.
+
+Some scenarios:
+
+```java
+var x = "Hello World";
+var y = "Hello World";
+
+System.out.println(x == y); // true
+```
+
+Remember that a String is immutable and literals are pooled. The JVM created only one literal in memory. The x and y variables both point to the same location in memory. Therefore, the statement outputs true.
+
+```java
+var x = "Hello World";
+var y = " Hello World".trim();
+
+System.out.println(x == z); // false
+```
+
+We don't have two of the same String literal. Although x and y happen to evaluate to the same string, `one is computed at runtime. Since it isn't the same at compile-time, a new String object is created`.
+
+```java
+var singleString = "hello world";
+var concat = "hello "
+concat += "world";
+
+System.out.println(singleString == concat); // false
+```
+
+Calling `+=` just like calling a method and results in a new String.
+
+We can also tell Java to use the string pool. The `intern()` method will use an object in the string pool if one is present.
+
+```java
+public String intern();
+```
+
+If the literal is not yet in the pool, Java will add it at this time.
+
+```java
+var name = "Hello World";
+var name2 = new String("Hello World").intern();
+
+System.out.println(name == name2); // true
+```
