@@ -1035,3 +1035,197 @@ double num = Math.random();
 ```
 
 Since it is a random number, we can't know the result but, it can't be negative or 1.
+
+## Working with Dates and Times
+
+Java provides a number of APIs for working with dates and times. There's also an old `java.util.Date` class.
+
+We will need to use an import statement to work with the modern date and time classes:
+
+```java
+import java.time.*;
+```
+
+### Time Zone
+
+`Greenwich Mean Time (GMT)` is a time zone in Europe that is used as time zone zero when discussing offsets.
+
+We also have the `Coodtinated Universal Time (UTC)` which is a time zone standard.
+
+### Creating Dates and Times
+
+When working with dates and times, the first thing is to decide how much information we need.
+
+- `LocalDate`: contains just a date, without time and time zone
+- `LocalTime`: contains just a time, without date and time zone
+- `LocalDateTime`: contains date and time but no time zone
+- `ZonedDateTime`: contains a date, time and time zone
+
+It is possible to obtain date and time instances using a static method, each of the four classes has a static method called `now()`, which gives the current date and time:
+
+[Now.java](./Now.java)
+
+```java
+System.out.println(LocalDate.now()); // 2025-01-22
+System.out.println(LocalTime.now()); // 18:46:49.480071100
+System.out.println(LocalDateTime.now()); // 2025-01-22T18:46:49.480071100
+System.out.println(ZonedDateTime.now()); // 2025-01-22T18:46:49.480570700-03:00[America/Sao_Paulo]
+```
+
+All these classes have the static method `of()` that creates dates and times.
+
+The method signatures are as follows:
+
+```java
+// LocalDate
+public static LocalDate of(int year, int month, int dayOfMonth);
+public static LocalDate of(int year, Month month, int dayOfMonth);
+
+// LocalTime
+public static LocalTime of(int hour, int minute);
+public static LocalTime of(int hour, int minute, int second);
+public static LocalTime of(int hour, int minute, int second, int nanos);
+
+// LocalDateTime
+public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute);
+public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute, int second);
+public static LocalDateTime of(int year, int month, int dayOfMonth, int hour, int minute, int second, int nanos);
+
+// LocalDateTime - Month reference
+public static LocalDateTime of(int year, Month month, int dayOfMonth, int hour, int minute);
+public static LocalDateTime of(int year, Month month, int dayOfMonth, int hour, int minute, int second);
+public static LocalDateTime of(int year, Month month, int dayOfMonth, int hour, int minute, int second, int nanos);
+
+// LocalDateTime - LocalDate and LocalTime
+public static LocalDateTime of(LocalDate date, LocalTime time);
+
+// ZonedDateTime
+public static ZonedDateTime(int year, int month, int nanos, ZoneId zone);
+public static ZonedDateTime(LocalDate date, LocalTime time, ZoneId zone);
+public static ZonedDateTime(LocalDateTime dateTime, ZoneId zone);
+```
+
+The following code shows how to use these methods: [DatesAndTimes.java](./DatesAndTimes.java)
+
+The compiler will throw a `DateTimeException` if we pass invalid numbers to `of()`.
+
+### Manipulating Dates and Times
+
+The date and time classes are immutable. Assign the results of these methods to a reference variable.
+
+```java
+var date = LocalDate.of(2025, 1, 22);
+System.out.println(date); // 2025-01-22
+
+date = date.plusDays(2);
+System.out.println(date); // 2025-01-24
+
+date = date.plusWeeks(1);
+System.out.println(date); // 2025-01-31
+
+date = date.plusMonths(1);
+System.out.println(date); // 2025-02-28
+```
+
+This code does what it looks like.
+
+There are also methods in time:
+
+```java
+  var date = LocalDate.of(2025, 1, 22);
+  var time = LocalTime.of(7, 25);
+  var dateTime = LocalDateTime.of(date, time);
+
+  System.out.println(dateTime); // 2025-01-22T07:25
+
+  dateTime = dateTime.minusHours(10);
+  System.out.println(dateTime); // 2025-01-21T21:25
+
+  dateTime = dateTime.minusSeconds(30);
+  System.out.println(dateTime); // 2025-01-21T21:24:30
+```
+
+#### Methods in LocalDate, LocalTime, LocalDateTime and ZonedDateTime
+
+<table>
+  <tr>
+    <td></td>
+    <td>Can call on <b>LocalDate</b>?</td>
+    <td>Can call on <b>LocalTime</b>?</td>
+    <td>Can call on <b>LocalDateTime</b> or <b>ZonedDateTime</b>?</td>
+  </tr>
+  <tr>
+    <td><b>plusYears() / minusYears()</b></td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><b>plusMonths() / minusMonths()</b></td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><b>plusWeeks() / minusWeeks()</b></td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+    <tr>
+    <td><b>plusDays() / minusDays()</b></td>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+    <tr>
+    <td><b>plusHours() / minusHours()</b></td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><b>plusMinutes() / minusMinutes()</b></td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><b>plusSeconds() / minusSeconds()</b></td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><b>plusNanos() / minusNanos()</b></td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Working with Periods
+
+A zoo performs animal enrichment activities to give the animals something enjoyable to do. The head zookeeper has decided to switch the toys every month. This system will continue for three months to see how it works out.
+
+[Zoo.java](./Zoo.java)
+
+This code works fine. It adds a month to the date until it hits the end date. The problem is that this method can't be reused. The zookeeper want to try different schedules.
+
+For this, Java has a Period class. This code does the same thing as the previous example but with flexibility.
+
+[ZooWithPeriod.java](./ZooWithPeriod.java)
+
+This will allow to reuse the same method for different periods of time as the zookeeper changes their mind.
+
+There are five ways to create a Period class:
+
+```java
+var annually = Period.ofYears(1);
+var quarterly = Period.ofMonths(3);
+var everyThreeWeeks = Period.ofWeeks(3);
+var everyOtherDay = Period.ofDays(2);
+var everyYearAndAWeek = Period.of(1, 0, 7);
+```
+
+It is not possible to chain methods when creating a Period.
