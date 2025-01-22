@@ -915,3 +915,123 @@ The most common operation on a multidimensional array is to loop through it.
 We will need two loops. The first will uses the index `i` and goes through the first subarray. The second uses a different loop variable, `j`.
 
 The `inner loop` looks at how many elements are in the second-level array, for example: [UsingMultidimensionalArray.java](./UsingMultidimensionalArray.java)
+
+## Calculating with Math APIs
+
+Java comes with a powerful Math class with many methods. We will cover a few common ones.
+
+### Finding the Minimum and Maximum
+
+The `min()` and `max()` methods compare two values and return one of them.
+
+The method signatures are as follows:
+
+```java
+public static double min(double a, double b);
+public static double max(double a, double b);
+
+public static float min(float a, float b);
+public static float max(float a, float b);
+
+public static int min(int a, int b);
+public static int max(int a, int b);
+
+public static long min(long a, long b);
+public static long max(long a, long b);
+```
+
+There are four overloaded methods, but they all work the same way.
+
+The following code shows how to use these methods:
+
+```java
+int first = Math.min(7, -9); // -9
+int second = Math.max(3, 7); // 7
+```
+
+1. Returns the -9 because it is the smaller
+2. Returns the 7 because it is the larger
+
+### Rounding Numbers
+
+The `round()` method gets rid of the decimal portion of the value, choosing the next higher number if appropriate. `If the fractional is .5 or higher, round up`.
+
+The method signatures are as follows:
+
+```java
+public static long round(double num);
+
+public static int round(float num);
+```
+
+The following code shows how to use `round()`:
+
+```java
+long low = Math.round(123.45); // 123
+long high = Math.round(123.50); // 124
+int fromFloat = Math.round(123.45f); // 123
+```
+
+1. Returns 123 because .45 is smaller than a half
+2. Returns 124 because the fractional part is a half
+3. The same as 1 but returning int
+
+### Determining the Ceiling and Floor
+
+The `ceil()` method takes a double value. If it has any fractional value, it rounds up to the next whole number.
+
+The `floor()` method discards any values after the decimal.
+
+The method signatures are as follows:
+
+```java
+public static double ceil(double num);
+
+public static double floor(double num);
+```
+
+The following code shows how to use these methods:
+
+```java
+double c = Math.ceil(3.14); // 4.0
+double f = Math.floor(3.14); // 3.0
+```
+
+1. Returns 4 because is the closest largest integer
+2. Returns 3 because it is the closest smallest integer
+
+### Calculating Exponents
+
+The `pow()` method handles exponents, for example, 3<sup>2</sup> means three squared. This is 3 * 3 or 9.
+
+The method signature is as follows:
+
+```java
+public static double poow(double number, double exponent);
+```
+
+The following code shows how to use this method:
+
+```java
+double squared = Math.pow(5, 2); // 25.0
+```
+
+1. Returns 25.0 since it is a double. 5<sup>2</sup> is 5 * 5 or 25
+
+### Generating Random Numbers
+
+The `random()` method returns a value greater than or equal to 0 and less than 1.
+
+The method signature is as follows:
+
+```java
+public static double random();
+```
+
+The following code shows how to use this method:
+
+```java
+double num = Math.random();
+```
+
+Since it is a random number, we can't know the result but, it can't be negative or 1.
