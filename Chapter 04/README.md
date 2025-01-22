@@ -490,7 +490,7 @@ System.out.println(String.format("Hello %s, order %d is ready", name, orderId));
 System.out.println("Hello %s, order %d is ready".formatted(name, orderId));
 ```
 
-In the `format()` and `formatted()` operations, the parameters are inserted and formatted via symbols in the order that they are provided in the `vararg`.
+In the `format()` and `formatted()` operations, the parameters are inserted and formatted via symbols in the order that they are provided in the `varargs`.
 
 #### Common formatting symbols
 
@@ -863,3 +863,55 @@ Method | When arrays contain the same data | When arrays are different
 `equals()` | true | false
 `compare()` | 0 | Positive or negative number
 `mismatch()` | -1 | Zero or positive index
+
+### Using Methods with Varargs
+
+```java
+public static void main(String... args) {} // varargs
+```
+We can use a variable defined using varargs as if it were a normal array. For example, `args.length` and `args[0]` are legal.
+
+### Creating a Multidimensional Array
+
+Multiple array separators are all it takes to declare arrays with multiple dimensions, for example:
+
+```java
+int[][] vars1; // 2d array
+int vars2[][]; // 2d array
+int[] vars3[]; // 2d array
+int[] vars4[], space[][]; // a 2d and a 3d array
+```
+
+1. Declaring a two-dimensional (2D) array
+2. Declaring a two-dimensional (2D) array
+3. Also declares a 2D array but, there's no good reason to use this style other than to confuse readers with your code
+4. Declares two arrays on the same line, vars4 is a 2D array and space is a 3D array
+
+We can also specify the size of our multidimensional array in the declaration, for example:
+
+```java
+String[][] rectangle = new String[3][2];
+```
+
+The result of this statement is an array rectangle with three elements, each element refers to an array of two elements.
+
+Now suppose we set one of these values:
+
+```java
+rectangle[0][1] = "set";
+```
+
+#### Visualization of the rectangle
+
+&emsp;&emsp;&emsp;0&emsp;&emsp;&emsp; | &emsp;&emsp;&emsp;1&emsp;&emsp;&emsp; | &emsp;&emsp;&emsp;2
+--- | --- | ---
+&ensp;&emsp;`0 \| 1` | &ensp;&emsp;`0 \| 1` | &ensp;&emsp;`0 \| 1`
+`null \| "set"` |  `null \| null` | `null \| null`
+
+### Using a Multidimensional Array
+
+The most common operation on a multidimensional array is to loop through it.
+
+We will need two loops. The first will uses the index `i` and goes through the first subarray. The second uses a different loop variable, `j`.
+
+The `inner loop` looks at how many elements are in the second-level array, for example: [UsingMultidimensionalArray.java](./UsingMultidimensionalArray.java)
