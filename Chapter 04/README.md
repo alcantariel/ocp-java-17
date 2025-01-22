@@ -633,3 +633,233 @@ var name2 = new String("Hello World").intern();
 
 System.out.println(name == name2); // true
 ```
+
+## Understanding Arrays
+
+We have been referring to the String and StringBuilder classes as a `sequence of characters`. This is true because they are implemented using an `array of characters`.
+
+An array is an area of memory on the heap with space for a designated number of elements and can be of any other Java type.
+
+In other words, an array is an ordered list. It can contain duplicates.
+
+### Creating an Array of Primitives
+
+The most common way to create an array is shows as below. It specifies the type of the array `int` and the size `3`. The brackets `[]` tell that this is an array.
+
+#### The basic structure of an array
+
+```java
+int[] numbers = new int[3];
+```
+
+1. Type of array
+2. Array symbol (required)
+3. Size of the array
+
+Using this form to instantiate an array, all elements are set to the default value for that type. As we know, the default value of an int is 0, so the array is something like:
+
+<table>
+  <tr>
+    <td>Index: </td>
+    <td>0</td>
+    <td>1</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Element: </td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+  </tr>
+</table>
+
+Another way to create an array is to specify all the elements it should start:
+
+```java
+int[] moreNumbers = new int[] { 42, 55, 99 };
+```
+
+We also create an int array of size 3, initializing with those values:
+
+<table>
+  <tr>
+    <td>Index: </td>
+    <td>0</td>
+    <td>1</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Element: </td>
+    <td>42</td>
+    <td>55</td>
+    <td>99</td>
+  </tr>
+</table>
+
+Java recognizes that this expression is redundant. Since we are specifying the type of the array on the left side and lets we write this:
+
+```java
+int[] moreNumbers = { 42, 55, 99 };
+```
+
+Finally, we can also type the `[]` before or after the name, the space is optional, for example:
+
+```java
+int[] numAnimals;
+int [] numAnimals2;
+int numAnimals3[];
+int numAnimals4 [];
+```
+
+Most people use the first one.
+
+### Using an array
+
+```java
+String[] mammals = { "monkey", "chimp", "donkey" };
+
+System.out.println(mammals.length); // 3
+System.out.println(mammals[0]); // monkey
+System.out.println(mammals[1]); // chimp
+System.out.println(mammals[2]); // donkey
+```
+
+1. Declares and initializes the array
+2. How many elements the array can hold
+3. The prints will print the array elements starting from index 0
+
+### Sorting
+
+Arrays have sort methods.
+
+`Arrays` requires an import.
+
+```java
+import java.util.*; // import whole package including Arrays
+import java.util.Arrays; // import just Arrays
+```
+
+Or we can write `java.util.Arrays` every time we use in the class instead of specifying it as an import.
+
+#### Example sorting three numbers:
+
+```java
+int[] numbers = { 6, 9, 1 };
+Arrays.sort(numbers);
+
+System.out.println(numbers[0]); // 1
+System.out.println(numbers[1]); // 6
+System.out.println(numbers[2]); // 9
+```
+
+#### Example sorting three numbers as String:
+
+```java
+int[] strings = { "10", "9", "100" };
+Arrays.sort(strings);
+
+System.out.println(strings[0]); // 10
+System.out.println(strings[1]); // 100
+System.out.println(strings[2]); // 9
+```
+
+String sort in alphabetic order.
+
+### Searching
+
+Java also provides a way to search, `but only if the array is already sorted`.
+
+#### Binary search rules
+
+Scenario | Result
+--- | ---
+Target element found in sorted array | Index of match
+Target element not found in sorted array | Negative value of the index that should be inserted, subtracting 1
+Unsorted array | The result is undefined
+
+Rules with examples:
+
+```java
+int[] numbers = { 2, 4, 6, 8 };
+
+System.out.println(Arrays.binarySearch(numbers, 2)); // 0
+System.out.println(Arrays.binarySearch(numbers, 4)); // 1
+System.out.println(Arrays.binarySearch(numbers, 1)); // -1
+System.out.println(Arrays.binarySearch(numbers, 3)); // -2
+System.out.println(Arrays.binarySearch(numbers, 9)); // -5
+```
+
+1. Found at index 0
+2. Found at index 1
+3. Should be inserted at index 0, subtracting 1, resulting -1
+4. Should be inserted at index 1, so the negative -1, subtracting 1, resulting -2
+5. Should be inserted at index 4, so the negative -4, subtracting 1, resulting -5
+
+### Comparing
+
+Java also provides methods to compare two arrays to determine which is "smaller".
+
+#### Using compare()
+
+There are some rules before calling `compare()`:
+
+- A `negative` number means the first array is smaller than the second
+- A `zero` means the arrays are equal
+- A `positive` number means the first array is larger than the second
+
+For example:
+
+```java
+var arr1 = new int[] { 1 };
+var arr2 = new int[] { 2 };
+
+System.out.println(Arrays.compare(arr1, arr2));
+```
+
+The code prints a negative number since 1 is smaller than 2, making the first array smaller.
+
+Now comparing arrays of different lengths:
+
+- If both arrays has the same length and have the same values in the same index, return zero
+- If all the elements are the same, but the second array has extra elements at the end, return a negative number
+- If all the elements are the same, but the first array has extra elements at the end, return a positive number
+- If the first element that differs is smaller in the first array, return a negative number
+- If the first element that differs is larger in the first array, return a positive number
+
+Smaller meaning:
+
+- null is smaller than any other value
+- For numbers, normal numeric order applies
+- For strings, one is smaller if it is a prefix of another
+- For strings/characters, numbers are smaller than letters
+- For strings/characters, uppercase is smaller than lowercase
+
+#### Arrays.compare() examples
+
+First array | Second array | Result | Reason
+--- | --- | --- | ---
+`new int[] { 1 , 2 }` | `new int[] { 1 }` | Positive number | The first element is the same, but the first array is longer
+`new int[] { 1 , 2 }` | `new int[] { 1 }` | Zero | Exact match
+`new String[] { "a" }` | `new String[] { "aa" }` | Negative number | The first element is a substring of the second
+`new String[] { "a" }` | `new String[] { "A" }` | Positive number | Uppercase is smaller than lowercase
+`new String[] { "a" }` | `new String[] { null }` | Positive number | null is smaller than a letter
+
+`Both arrays must be the same type, or it will cause a compilation error`.
+
+### Using mismatch()
+
+If the arrays are equal, `mismatch()` returns -1. Otherwise, it returns the first index where they differ.
+
+```java
+System.out.println(Arrays.mismatch(new int[] { 1 }, new int[] { 1 })); // -1
+System.out.println(Arrays.mismatch(new String[] { "a" }, new String[] { "A" })); // 0
+System.out.println(Arrays.mismatch(new int[] { 1, 2 }, new int[] { 1 })); // 1
+```
+
+#### Equality vs. comparison vs. mismatch
+
+Method | When arrays contain the same data | When arrays are different
+--- | --- | ---
+`equals()` | true | false
+`compare()` | 0 | Positive or negative number
+`mismatch()` | -1 | Zero or positive index
