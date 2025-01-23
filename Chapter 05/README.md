@@ -48,3 +48,69 @@ Method body | { // take a nap } | Yes, except for abstract methods
 To call this method, just use the method signature and provide an int value in parentheses: `nap(10)`.
 
 ### Access Modifiers
+
+An access modifier determines what classes a method can be accessed from. Think of it like a security guard.
+
+Access modifiers help to enforce when components are allowed to talk to each other.
+
+There are four choices of access modifier:
+
+- `private`: means the method can be called only from within the same class
+- `Package Access`: the method can be called only from a class in the same package. Simply omit the access modifier. Package access is sometimes referred to as package-private or default
+- `protected`: means the method can be called only from a class in the same package or a subclass
+- `public`: means the method can be called from anywhere
+
+```java
+public class ParkTrip {
+  public void skip1() {}
+
+  default void skip2() {} // DOES NOT COMPILE
+
+  void public skip3() {} // DOES NOT COMPILE
+
+  void skip4() {}
+}
+```
+
+1. Is a valid declaration with public access
+2. The default is not a valid access modifier, there is a default keyword, which is used in switch statements and interfaces
+3. The access modifier should be specified before the return type
+4. Is a valid declaration with package access
+
+### Optional Specifiers
+
+Unlike access modifiers, we can have multiple specifiers in the same method (although not all combinations are legal). We can specify them in any order. And since these specifiers are optional, we can have zero or more specifiers in a method declaration.
+
+#### Optional specifier for methods
+
+Modifier | Description | Chapter covered
+--- | --- | ---
+static | Indicates the method is a member of the shared class object | Chapter 05
+abstract | Used in an abstract class or interface when the method body is excluded | Chapter 06
+final | Specifies that the method may not be overridden in a subclass | Chapter 06
+default | Used in an interface to provide a default implementation of a method for classes that implement the interface | Chapter 07
+synchronized | Used with multithreaded code | Chapter 13
+native | Used when interacting with code written in another language | Out of scope
+strictfp | Used for making floating-point calculations portable | Out of scope
+
+```java
+public class Exercise {
+  public void bike1() {}
+
+  public final void bike2() {}
+
+  public static final void bike3() {}
+
+  public final static void bike4() {}
+
+  public modifier void bike5() {} // DOES NOT COMPILE
+
+  public void final bike6() {} // DOES NOT COMPILE
+
+  final public void bike7() {}
+}
+```
+
+While access modifiers and optional specifiers can appear in any order, `they must all appear before the return type`.
+
+It is not possible to declare a method or class both final and abstract.
