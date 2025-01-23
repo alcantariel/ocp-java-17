@@ -1,7 +1,5 @@
 # Chapter 02 - Operators
 
-OCP Exam objectives covered in this chapter:
-
 - Handling date, time, text, numeric and boolean values
   - Use primitives and wrapper classes including Math API, parentheses, type promotion, and casting to evaluate arithmetic and boolean expressions
 
