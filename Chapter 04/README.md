@@ -1229,3 +1229,153 @@ var everyYearAndAWeek = Period.of(1, 0, 7);
 ```
 
 It is not possible to chain methods when creating a Period.
+
+#### Period format
+
+```java
+System.out.println(Period.of(1, 2, 3)); // P1Y2M3D
+```
+
+P | 1Y | 2M | 3D
+--- | --- | --- | ---
+Period (mandatory) | Years | Months | Days
+
+### Working with Durations
+
+There is also Duration, which is for smaller units of time. We can specify the number of days, hours, minutes, seconds or nanoseconds.
+
+We could pass 365 days to make a year, but we shouldn't, that's what Period is for.
+
+Duration is used with objects that have time. Duration's output beginning with PT that means period of time.
+
+A duration is stored in hours, minutes and seconds. The number of has fractional seconds.
+
+The following code shows how to use with different granularities:
+
+```java
+var daily = Duration.ofDays(1); // PT24H
+var hourly = Duration.ofHours(1); // PT1H
+var everyMinute = Duration.ofMinutes(1); // PT1M
+var everyTenSeconds = Duration.ofSeconds(10); // PT10S
+var everyMilli = Duration.ofMillis(1); // PT0.001S
+var everyNano = Duration.ofNanos(1); // PT0.000000001S
+```
+
+Duration includes another more generic factory method, it takes a number and a TemporalUnit.
+
+The previous example could be written like this:
+
+```java
+var daily = Duration.ofDays(1, ChronoUnit.DAYS);
+var hourly = Duration.ofHours(1, ChronoUnit.HOURS);
+var everyMinute = Duration.ofMinutes(1, ChronoUnit.MINUTES);
+var everyTenSeconds = Duration.ofSeconds(10, ChronoUnit.SECONDS);
+var everyMilli = Duration.ofMillis(1, ChronoUnit.MILLIS);
+var everyNano = Duration.ofNanos(1, ChronoUnit.NANOS);
+```
+
+ChronoUnit also includes `ChronoUnit.HALF_DAYS` to represent 12 hours.
+
+### ChronoUnit for Differences
+
+ChronoUnit is a great way to determine how far apart two Temporal values are.
+
+Temporal includes LocalDate, LocalTime, and so on. ChronoUnit is in the `java.time.temporal` package.
+
+```java
+var one = LocalTime.of(5, 15);
+var two = LocalTime.of(6, 30);
+
+System.out.println(ChronoUnit.HOURS.between(one, two)); // 1
+System.out.println(ChronoUnit.MINUTES.between(one, two)); // 75
+```
+
+We can also truncate any object with a time element, for example:
+
+```java
+LocalTime time = LocalTime.of(6, 3, 45);
+System.out.println(time); // 06:03:45
+
+LocalTime truncated = time.truncatedTo(ChronoUnit.MINUTES);
+System.out.println(truncated); // 06:03
+```
+
+The example zeroes out any fields smaller than minutes. In this case, gets rid of the seconds.
+
+### Period vs. Duration
+
+Period and Duration are not equivalent.
+
+```java
+var date = LocalDate.of(2025, 1, 23);
+var period = Period.ofDays(1);
+var duration = Duration.ofDays(1);
+
+System.out.println(date.plus(period)); // 2025-01-24
+System.out.println(date.plus(duration)); // Unsupported unit: Seconds
+```
+
+Since we are working with a LocalDate, it is required to use Period.
+
+Period has time units in it, even if we don't see them, they are meant only for objects with time.
+
+#### Where to use Duration and Period
+
+<table>
+  <tr>
+    <td></td>
+    <td>Can use with <b>Period</b>?</td>
+    <td>Can use with <b>Duration</b>?</td>
+  </tr>
+  <tr>
+    <td><b>LocalDate</b></td>
+    <td>Yes</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td><b>LocalDateTime</b></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><b>LocalTime</b></td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><b>ZonedDateTime</b></td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Working with Instants
+
+The Instant class represents a specific moment in time in the GMT time zone.
+
+```java
+var now = Instant.now();
+
+// do something time consuming over a second
+
+var later = Instant.now();
+
+var duration = Duration.between(now, later);
+System.out.println(duration); // returns number milliseconds
+```
+We can turn a ZonedDateTime into an Instant:
+
+```java
+var date = LocalDate.of(2025, 1, 23);
+var time = LocalTime.of(6, 15);
+var zone = ZoneId.of("America/Sao_Paulo");
+var zonedDateTime = ZonedDateTime.of(date, time, zone);
+var instant = ZonedDateTime.toInstant();
+
+System.out.println(zonedDateTime); // 2025-01-23T06:15-03:00[America/Sao_Paulo]
+System.out.println(instant); // 2025-01-23T09:15:00Z
+```
+
+The ZonedDateTime includes a time zone.
+
+The Instant gets rid of the time zone and turns it into an Instant of time in GMT.
