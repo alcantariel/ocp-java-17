@@ -6,7 +6,7 @@
 - [Chapter 02 - Operators](./Chapter%2002/README.md)
 - [Chapter 03 - Making Decisions](./Chapter%2003/README.md)
 - [Chapter 04 - Core APIs](./Chapter%2004/README.md)
-- Chapter 05 - Methods
+- [Chapter 05 - Methods](./Chapter%2005/README.md)
 - Chapter 06 - Class Design
 - Chapter 07 - Beyond Classes
 - Chapter 08 - Lambdas and Functional Interfaces
