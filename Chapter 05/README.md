@@ -114,3 +114,74 @@ public class Exercise {
 While access modifiers and optional specifiers can appear in any order, `they must all appear before the return type`.
 
 It is not possible to declare a method or class both final and abstract.
+
+### Return Type
+
+It must appear after any access modifiers or optional specifiers, and before the method name.
+
+The return type might be an actual Java type such as String or int. If there is no return type, the void keyword is used. This return type means without contents.
+
+Methods with a return type other than void are required to have a return statement inside the method body.
+
+Methods that have a return type of void are permitted to have a return statement with no value returned or omit the return statement, for example:
+
+```java
+public void swim(int distance) {
+  if (distance <= 0) {
+    // exit early, nothing to do
+    return;
+  }
+
+  System.out.println("Fish is swimming " + distance + " meters");
+}
+```
+
+More examples:
+
+```java
+public class Hike {
+  public void hike1() {}
+
+  public void hike2() {
+    return;
+  }
+
+  public String hike3() {
+    return "";
+  }
+
+  public String hike4() {} // DOES NOT COMPILE
+
+  public hike5() {} // DOES NOT COMPILE
+
+  public String int hike6() {} // DOES NOT COMPILE
+
+  String hike7() { // DOES NOT COMPILE
+    if (1 < 2) {
+      return "orange";
+    }
+  }
+}
+```
+
+1. The return is optional
+2. Shows the optional return statement that doesn't return anything
+3. The return type is String, and it returns a String
+4. Doesn't compile because return statement is missing
+5. Doesn't compile because the return type is missing
+6. Doesn't compile because it attempts to use two return types
+7. There is a return statement, but it doesn't always get run. Even though 1 is always less than 2, the compiler won't evaluate the if statement and requires a return statement if this condition is false
+
+```java
+// return with if
+
+String hike8() {
+  if (1 < 2) {
+    return "orange";
+  }
+
+  return "apple";
+}
+```
+
+This code compiles, although the compiler will produce a warning about unreachable code since the if statement is always true.
