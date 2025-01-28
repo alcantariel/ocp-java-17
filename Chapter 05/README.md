@@ -185,3 +185,30 @@ String hike8() {
 ```
 
 This code compiles, although the compiler will produce a warning about unreachable code since the if statement is always true.
+
+### Method name
+
+Method names follow the same rules as variable names.
+
+```java
+public class BeachTrip {
+  public void jog1() {}
+
+  public void 2jog() {} // DOES NOT COMPILE
+
+  public jog3 void() {} // DOES NOT COMPILE
+
+  public void Jog_$() {}
+
+  public _() {} // DOES NOT COMPILE
+
+  public void() {} // DOES NOT COMPILE
+}
+```
+
+1. Is a valid declaration with a traditional name
+2. Does not compile because is not allowed to begin with numbers
+3. Does not compile because the method name is before the return type
+4. Is a valid declaration despite being a bad practice
+5. Is not allowed since it consists of a single underscore
+6. Method name missing
