@@ -212,3 +212,27 @@ public class BeachTrip {
 4. Is a valid declaration despite being a bad practice
 5. Is not allowed since it consists of a single underscore
 6. Method name missing
+
+### Parameter List
+
+Although the parameter list is required, it does not have to contain any parameters. This means we can have an empty pair of parentheses after the method name, for example:
+
+```java
+public class Sleep {
+  void nap() {}
+}
+```
+
+With multiple parameters, we separate them with a comma, for example:
+
+```java
+public class PhysicalEducation {
+  public void run1() {}
+
+  public void run2(int a) {}
+
+  public void run3(int a, int b) {}
+}
+```
+
+There are a couple of rules for the parameter list that we'll see when varargs was covered.
