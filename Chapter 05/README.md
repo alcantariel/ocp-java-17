@@ -236,3 +236,29 @@ public class PhysicalEducation {
 ```
 
 There are a couple of rules for the parameter list that we'll see when varargs was covered.
+
+### Method Signature
+
+A method signature, composed of the method name and parameter list, is what Java uses to uniquely determine exactly which method we are attempting to call, then determines if the call is allowed.
+
+It's important to note that the names of the parameters in the method signature are not used as part of a method signature. The parameter list is about the types of parameters and their order, for example:
+
+```java
+public class Trip {
+  public void visitZoo(String name, int waitTime) {}
+
+  public void visitZoo(String attraction, int rainFall) {} // DOES NOT COMPILE
+}
+```
+
+Despite having different parameter names, these two methods have the exact same signature and cannot be declared within the same class. Changing the order of parameter types does allow the method to compile, though:
+
+```java
+public class Trip {
+  public void visitZoo(String name, int waitTime) {}
+
+  public void visitZoo(int rainFall, String attraction) {}
+}
+```
+
+We will cover these rules in more detail when we get to method overloading.
