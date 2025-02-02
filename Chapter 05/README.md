@@ -278,3 +278,16 @@ public class ZooMonorail {
 ```
 
 While the list of exceptions is optional, it may be required by the compiler, depending on what appear inside the method body.
+
+### Method Body
+
+A method body is a code block. It has braces that contain zero or more Java statements, for example:
+
+```java
+public class Bird {
+  public void fly(int a) {
+    // method body
+    int name = 5;
+  }
+}
+```
