@@ -291,3 +291,70 @@ public class Bird {
   }
 }
 ```
+
+## Declaring Local and Instance Variables
+
+```java
+public class Lion {
+  int hunger = 4;
+
+  public int feedZooAnimals() {
+    int snack = 10; // Local variable
+
+    if (snack > 4) {
+      long dinnerTime = snack++;
+      hunger--;
+    }
+
+    return snack;
+  }
+}
+```
+
+In this class, snack and dinnerTime are local variables, only accessible within their respective code blocks, while hunger is an instance variable and created in every object of the Lion class.
+
+The object or value returned by a method may be available outside the method, but the variable reference snack is gone.
+
+### Local Variable Modifiers
+
+There's only one modifier that can be applied to a local variable: `final`. The final modifier does not allow changing the variable reference, resulting in a compiler error, for example:
+
+```java
+public void zooAnimalCheckup(boolean isWeekend) {
+  final int rest;
+
+  if (isWeekend) {
+    rest = 5;
+  } else {
+    rest = 20;
+  }
+
+  System.out.print(rest);
+
+  final var giraffe = new Animal();
+  final int[] friends = new int[5];
+
+  rest = 10; // DOES NOT COMPILE
+  giraffe = new Animal(); // DOES NOT COMPILE
+  friends = null; // DOES NOT COMPILE
+}
+```
+
+We don't need to assign a value when a final variable is declared, but it must be assigned a value before it can be used.
+
+The final modifier does not mean that we can't modify the data, it refers to the variable reference, the content can be modified freely (assuming the object isn't immutable).
+
+```java
+public void zooAnimalCheckup() {
+  final int rest = 5;
+  final Animal giraffe = new Animal();
+  final int[] friends = new int[5];
+
+  giraffe.setName("George");
+  friends[2] = 2;
+}
+```
+
+The rest variable is a primitive, so it's just a value that can't be modified. On the other hand, contents of the giraffe and friends variables can be freely modified, provided the variables aren't reassigned.
+
+Making a local variable final is a good practice, avoiding unexpected side effects.
