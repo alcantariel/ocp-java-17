@@ -261,4 +261,20 @@ public class Trip {
 }
 ```
 
-We will cover these rules in more detail when we get to method overloading.
+These rules will be covered in more detail when we get to method overloading.
+
+### Exception List
+
+We can also indicate that something went wrong by throwing an exception, and we can list as many types of exceptions as we want in this clause, separated by commas, for example:
+
+```java
+public class ZooMonorail {
+  public void zeroExceptions() {}
+
+  public void oneException() throws IllegalArgumentException {}
+
+  public void twoExceptions() throws IllegalArgumentException, InterruptedException {}
+}
+```
+
+While the list of exceptions is optional, it may be required by the compiler, depending on what appear inside the method body.
