@@ -83,7 +83,7 @@ Unlike access modifiers, we can have multiple specifiers in the same method (alt
 
 #### Optional specifier for methods
 
-Modifier | Description | Chapter covered
+Modifier | Description | Chapter Covered
 --- | --- | ---
 static | Indicates the method is a member of the shared class object | Chapter 05
 abstract | Used in an abstract class or interface when the method body is excluded | Chapter 06
@@ -358,3 +358,87 @@ public void zooAnimalCheckup() {
 The rest variable is a primitive, so it's just a value that can't be modified. On the other hand, contents of the giraffe and friends variables can be freely modified, provided the variables aren't reassigned.
 
 Making a local variable final is a good practice, avoiding unexpected side effects.
+
+### Instance Variable Modifiers
+
+Like methods, instance variables can use access modifiers, such as private, package, protected and public. Instance variables can also use optional specifiers.
+
+#### Optional specifiers for instance variables
+
+Modifier | Description | Chapter Covered
+--- | --- | ---
+final | Specifies that the instance variable must be initialized with each instance of the class exactly once | Chapter 05
+volatile | Instructs the JVM that the value in this variable may be modified by other threads | Chapter 13
+transient | Used to indicate that an instance variable should not be serialized with the class | Chapter 14
+
+## Working with Varargs
+
+A method may use a varargs parameter (variable argument) as if it is an array. Creating a method with varargs is a bit more complicated. In fact, calling such a method may not use an array at all.
+
+### Creating Methods with Varargs
+
+There are some rules for creating a method with varargs:
+
+1. A method can have at most one varargs parameter
+2. If a method contains a varargs parameter, it must be the last parameter in the list
+
+For example:
+
+```java
+public class VisitAttractions {
+  public void walk1(int... steps) {}
+
+  public void walk2(int start, int...steps) {}
+
+  public void walk3(int... steps, int start) {} // DOES NOT COMPILE
+
+  public void walk4(int... start, int... steps) {} // DOES NOT COMPILE
+}
+```
+
+1. Valid declaration with one varargs
+2. Valid declaration with varargs as last parameter
+3. Have varargs in position that is not the last one
+4. Have varargs in position that is not the last one
+
+### Calling Methods with Varargs
+
+When calling a method with varargs, we can pass an array, or we can list the elements of the array and let Java create.
+
+[VarargsParameters.java](./VarargsParameters.java)
+
+[VarargsWithOtherMethodParameters.java](./VarargsWithOtherMethodParameters.java)
+
+```java
+// Pass an array
+walk1(new int[] { 1, 2, 3 });
+
+// Pass a list of values
+walk1(1, 2, 3);
+
+// Omit values
+walk1();
+```
+
+### Accessing Elements of a Varargs
+
+Accessing a varargs parameter is like accessing an array. It uses array indexing, for example:
+
+```java
+public static void run(int... steps) {
+  System.out.println(steps[1]);
+}
+
+public static void main(String[] args) {
+  run(30, 77); // 77
+}
+```
+
+## Applying Access Modifiers
+
+Discussing access modifiers in order from most restrictive to least restrictive:
+
+- private: only accessible within the same class
+- package access: private plus other members of the same package. Sometimes referred to as package-private or default access
+- protected: package access plus access within subclasses
+- public: protected plus classes in the other packages
