@@ -931,35 +931,35 @@ Even though it is not logically possible for the if statement to evaluate to tru
 
 <table>
   <tr>
-    <td></td>
-    <td><b>Support labels</b></td>
-    <td><b>Support break</b></td>
-    <td><b>Support continue</b></td>
-    <td><b>Support yield</b></td>
+    <th></th>
+    <th>Support labels</th>
+    <th>Support break</th>
+    <th>Support continue</th>
+    <th>Support yield</th>
   </tr>
   <tr>
-    <td><b>while</b></td>
+    <th>while</th>
     <td>Yes</td>
     <td>Yes</td>
     <td>Yes</td>
     <td>No</td>
   </tr>
   <tr>
-    <td><b>do/while</b></td>
+    <th>do/while</th>
     <td>Yes</td>
     <td>Yes</td>
     <td>Yes</td>
     <td>No</td>
   </tr>
   <tr>
-    <td><b>for</b></td>
+    <th>for</th>
     <td>Yes</td>
     <td>Yes</td>
     <td>Yes</td>
     <td>No</td>
   </tr>
   <tr>
-    <td><b>switch</b></td>
+    <th>switch</th>
     <td>Yes</td>
     <td>Yes</td>
     <td>No</td>

@@ -442,3 +442,41 @@ Discussing access modifiers in order from most restrictive to least restrictive:
 - package access: private plus other members of the same package. Sometimes referred to as package-private or default access
 - protected: package access plus access within subclasses
 - public: protected plus classes in the other packages
+
+### Private Access
+
+With the private access, only code in the same class can call private methods or access private fields.
+
+<span style="color:red">
+  <b>
+    NOTE: The "pond" folder must be moved to the root folder to be run by an IDE because "Chapter 05" is an invalid package name.
+  </b>
+</span>
+
+#### Classes used to show private and package access
+
+<table>
+  <tr>
+    <th>Package</th>
+    <th>Classes</th>
+  </tr>
+  <tr>
+    <td>pond.duck</td>
+    <td>
+      <ul>
+        <li>FatherDuck</li>
+        <li>MotherDuck</li>
+        <li>BadDuckling</li>
+        <li>GoodDuckling</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>pond.swan</td>
+    <td>
+      <ul>
+        <li>BadCygnet</li>
+      </ul>
+    </td>
+  </tr>
+</table>

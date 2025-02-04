@@ -658,13 +658,13 @@ Using this form to instantiate an array, all elements are set to the default val
 
 <table>
   <tr>
-    <td>Index: </td>
+    <th>Index: </th>
     <td>0</td>
     <td>1</td>
     <td>2</td>
   </tr>
   <tr>
-    <td>Element: </td>
+    <th>Element: </th>
     <td>0</td>
     <td>0</td>
     <td>0</td>
@@ -681,13 +681,13 @@ We also create an int array of size 3, initializing with those values:
 
 <table>
   <tr>
-    <td>Index: </td>
+    <th>Index: </th>
     <td>0</td>
     <td>1</td>
     <td>2</td>
   </tr>
   <tr>
-    <td>Element: </td>
+    <th>Element: </th>
     <td>42</td>
     <td>55</td>
     <td>99</td>
@@ -1147,55 +1147,55 @@ There are also methods in time:
 
 <table>
   <tr>
-    <td></td>
-    <td>Can call on <b>LocalDate</b>?</td>
-    <td>Can call on <b>LocalTime</b>?</td>
-    <td>Can call on <b>LocalDateTime</b> or <b>ZonedDateTime</b>?</td>
+    <th></th>
+    <th>Can call on LocalDate?</th>
+    <th>Can call on LocalTime?</th>
+    <th>Can call on LocalDateTime or ZonedDateTime?</th>
   </tr>
   <tr>
-    <td><b>plusYears() / minusYears()</b></td>
-    <td>Yes</td>
-    <td>No</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td><b>plusMonths() / minusMonths()</b></td>
+    <th>plusYears() / minusYears()</th>
     <td>Yes</td>
     <td>No</td>
     <td>Yes</td>
   </tr>
   <tr>
-    <td><b>plusWeeks() / minusWeeks()</b></td>
+    <th>plusMonths() / minusMonths()</th>
     <td>Yes</td>
     <td>No</td>
     <td>Yes</td>
   </tr>
-    <tr>
-    <td><b>plusDays() / minusDays()</b></td>
+  <tr>
+    <th>plusWeeks() / minusWeeks()</th>
     <td>Yes</td>
     <td>No</td>
     <td>Yes</td>
   </tr>
-    <tr>
-    <td><b>plusHours() / minusHours()</b></td>
+  <tr>
+    <th>plusDays() / minusDays()</th>
+    <td>Yes</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <th>plusHours() / minusHours()</th>
     <td>No</td>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
   <tr>
-    <td><b>plusMinutes() / minusMinutes()</b></td>
+    <th>plusMinutes() / minusMinutes()</th>
     <td>No</td>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
   <tr>
-    <td><b>plusSeconds() / minusSeconds()</b></td>
+    <th>plusSeconds() / minusSeconds()</th>
     <td>No</td>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
   <tr>
-    <td><b>plusNanos() / minusNanos()</b></td>
+    <th>plusNanos() / minusNanos()</th>
     <td>No</td>
     <td>Yes</td>
     <td>Yes</td>
@@ -1321,27 +1321,27 @@ Period has time units in it, even if we don't see them, they are meant only for 
 
 <table>
   <tr>
-    <td></td>
-    <td>Can use with <b>Period</b>?</td>
-    <td>Can use with <b>Duration</b>?</td>
+    <th></th>
+    <th>Can use with Period?</th>
+    <th>Can use with Duration?</th>
   </tr>
   <tr>
-    <td><b>LocalDate</b></td>
+    <th>LocalDate</th>
     <td>Yes</td>
     <td>No</td>
   </tr>
   <tr>
-    <td><b>LocalDateTime</b></td>
+    <th>LocalDateTime</th>
     <td>Yes</td>
     <td>Yes</td>
   </tr>
   <tr>
-    <td><b>LocalTime</b></td>
+    <th>LocalTime</th>
     <td>No</td>
     <td>Yes</td>
   </tr>
   <tr>
-    <td><b>ZonedDateTime</b></td>
+    <th>ZonedDateTime</th>
     <td>Yes</td>
     <td>Yes</td>
   </tr>

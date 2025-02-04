@@ -546,17 +546,17 @@ Logical exclusive OR | e ^ f | Value is true only if one value is true and the o
 
 <table>
   <tr>
-    <td></td>
-    <td>y = true</td>
-    <td>y = false</td>
+    <th></th>
+    <th>y = true</th>
+    <th>y = false</th>
   </tr>
   <tr>
-    <td>x = true</td>
+    <th>x = true</th>
     <td>true</td>
     <td>false</td>
   </tr>
   <tr>
-    <td>x = false</td>
+    <th>x = false</th>
     <td>false</td>
     <td>false</td>
   </tr>
@@ -566,17 +566,17 @@ Logical exclusive OR | e ^ f | Value is true only if one value is true and the o
 
 <table>
   <tr>
-    <td></td>
-    <td>y = true</td>
-    <td>y = false</td>
+    <th></th>
+    <th>y = true</th>
+    <th>y = false</th>
   </tr>
   <tr>
-    <td>x = true</td>
+    <th>x = true</th>
     <td>true</td>
     <td>true</td>
   </tr>
   <tr>
-    <td>x = false</td>
+    <th>x = false</th>
     <td>true</td>
     <td>false</td>
   </tr>
@@ -586,17 +586,17 @@ Logical exclusive OR | e ^ f | Value is true only if one value is true and the o
 
 <table>
   <tr>
-    <td></td>
-    <td>y = true</td>
-    <td>y = false</td>
+    <th></th>
+    <th>y = true</th>
+    <th>y = false</th>
   </tr>
   <tr>
-    <td>x = true</td>
+    <th>x = true</th>
     <td>false</td>
     <td>true</td>
   </tr>
   <tr>
-    <td>x = false</td>
+    <th>x = false</th>
     <td>true</td>
     <td>false</td>
   </tr>
