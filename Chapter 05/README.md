@@ -447,12 +447,6 @@ Discussing access modifiers in order from most restrictive to least restrictive:
 
 With the private access, only code in the same class can call private methods or access private fields.
 
-<span style="color:red">
-  <b>
-    NOTE: The "pond" folder must be moved to the root folder to be run by an IDE because "Chapter 05" is an invalid package name.
-  </b>
-</span>
-
 #### Classes used to show private and package access
 
 <table>
