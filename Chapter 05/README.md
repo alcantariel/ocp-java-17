@@ -465,7 +465,7 @@ With the private access, only code in the same class can call private methods or
       </ul>
     </td>
   </tr>
-    <tr>
+  <tr>
     <td>pond.swan</td>
     <td>
       <ul>
@@ -474,3 +474,193 @@ With the private access, only code in the same class can call private methods or
     </td>
   </tr>
 </table>
+
+```java
+package pond.duck;
+
+public class FatherDuck {
+  private String noise = "quack";
+
+  private void quack() {
+    System.out.println(noise);
+  }
+}
+```
+
+FatherDuck declares a private method `quack()` and uses a private instance variable `noise`.
+
+```java
+package pond.duck;
+
+public class BadDuckling {
+
+  public void makeNoise() {
+    var duck = new FatherDuck();
+    duck.quack(); // DOES NOT COMPILE
+    System.out.println(duck.noise); // DOES NOT COMPILE
+  }
+}
+```
+
+BadDuckling is trying to access an instance variable and a method it has no business touching.
+
+It tries to access a private instance variable and a private method, and both generate compiler errors.
+
+Trying to access private members of other classes is not allowed, we have to use a different type of access.
+
+### Package Access
+
+MotherDuck is more accommodating about what her ducklings can do. She allows classes in the same package to access her members. When there's no access modifier, Java assumes package access.
+
+```java
+package pond.duck;
+
+public class MotherDuck {
+  String noise = "quack";
+
+  void quack() {
+    System.out.println(noise);
+  }
+}
+```
+
+```java
+package pond.duck;
+
+public class GoodDuckling {
+  public void makeNoise() {
+    var duck = new MotherDuck();
+    duck.quack(); // quack
+    System.out.println(duck.noise); // quack
+  }
+}
+```
+
+In the same pond, we have a baby swan and is called a cygnet and decides to learn from MotherDuck as well.
+
+```java
+package pond.swan; // another package
+
+public class BadCygnet {
+  public void makeNoise() {
+    var duck = new MotherDuck();
+    duck.quack(); // DOES NOT COMPILE
+    System.out.println(duck.noise); // DOES NOT COMPILE
+  }
+}
+```
+
+MotherDuck only allows lessons to other ducks by restricting access to the `pond.duck` package.
+
+### Protected Access
+
+Protected access allows everything that package access does and more. It adds the ability to access members of a parent class. The following example, the "child" ClownFish class is a subclass of the "parent" Fish class.
+
+```java
+public class Fish {}
+
+public class ClownFish extends Fish {}
+```
+
+By extending a class, the subclass gains access to all protected and public members of the parent class, as if they were declared in the subclass. If the two classes are in the same package, then the subclass also gains access to all package members.
+
+#### Classes used to show protected access
+
+<table>
+  <tr>
+    <th>Package</th>
+    <th>Classes</th>
+  </tr>
+  <tr>
+    <td>pond.shore</td>
+    <td>
+      <ul>
+        <li>Bird</li>
+        <li>BirdWatcher</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>pond.goose</td>
+    <td>
+      <ul>
+        <li>Gosling (extends Bird)</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>pond.inland</td>
+    <td>
+      <ul>
+        <li>BirdWatcherFromAfar</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+First, the "parent" class, `Bird`.
+
+```java
+package pond.shore;
+
+public class Bird {
+  protected String text = "floating";
+
+  protected void floatInWater() {
+    System.out.println(text);
+  }
+}
+```
+
+Subclasses:
+
+```java
+package pond.goose; // different package than Bird
+
+import pond.shore.Bird;
+
+public class Gosling extends Bird { // Gosling is a subclass of Bird
+  public void swim() {
+    floatInWater(); // floating
+    System.out.println(text); // floating
+  }
+}
+```
+
+This is a simple subclass. It `extends` the Bird class. Extending means creating a subclass that has access to any protected or public members of the parent class.
+
+Protected also gives us access to everything that package access does. This means a class in the same package as Bird can access its protected members.
+
+```java
+package pond.shore; // same package as Bird
+
+public class BirdWatcher {
+  public void watchBird() {
+    Bird bird = new Bird();
+    bird.floatInWater(); // floating
+    System.out.println(bird.text); // floating
+  }
+}
+```
+
+Since Bird and BirdWatcher are in the same package, BirdWatcher can access package members of the bird variable.
+
+The definition of protected allows access to subclasses and classes in the same package.
+
+Now the same thing from a different package:
+
+```java
+package pond.inland; // different package than Bird
+
+import pond.shore.Bird;
+
+public class BirdWatcherFromAfar { // not a subclass of Bird
+  public void watchBird() {
+    Bird bird = new Bird();
+    bird.floatInWater(); // DOES NOT COMPILE
+    System.out.println(bird.text); // DOES NOT COMPILE
+  }
+}
+```
+
+BirdWatcherFromAfar is not in the same package as Bird, and it doesn't inherit from Bird, this means it is not allowed to access protected members of Bird.
