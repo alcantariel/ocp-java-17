@@ -664,3 +664,77 @@ public class BirdWatcherFromAfar { // not a subclass of Bird
 ```
 
 BirdWatcherFromAfar is not in the same package as Bird, and it doesn't inherit from Bird, this means it is not allowed to access protected members of Bird.
+
+### Public Access
+
+The public access, means anyone can access the member from anywhere.
+
+```java
+package pond.duck;
+
+public class DuckTeacher {
+  public String name = "helpful";
+
+  public void swim() {
+    System.out.println(name);
+  }
+}
+```
+
+DuckTeacher allows access to any class that wants it.
+
+```java
+package pond.goose;
+
+import pond.duck.DuckTeacher;
+
+public class LostDuckling {
+  public void swim() {
+    var teacher = new DuckTeacher();
+    teacher.swim(); // helpful
+    System.out.println("Thanks " + teacher.name); // helpful
+  }
+}
+```
+
+LostDuckling is able to refer to `swim()` and `name` on DuckTeacher because they are public.
+
+### Reviewing Access Modifiers
+
+<table>
+  <tr>
+    <th></th>
+    <th>private</th>
+    <th>package</th>
+    <th>protected</th>
+    <th>public</th>
+  </tr>
+  <tr>
+    <th>the same class</th>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <th>another class in the same package</th>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <th>a subclass in a different package</th>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <th>an unrelated class in a different package</th>
+    <td>No</td>
+    <td>No</td>
+    <td>No</td>
+    <td>Yes</td>
+  </tr>
+</table>
