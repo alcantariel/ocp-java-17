@@ -738,3 +738,60 @@ LostDuckling is able to refer to `swim()` and `name` on DuckTeacher because they
     <td>Yes</td>
   </tr>
 </table>
+
+## Accessing static Data
+
+When the `static` keyword is applied to a variable, method or class, it belongs to the class rather than a specific instance of the class. Can also be applied to import statements.
+
+### Designing static Methods and Variables
+
+Methods and variables declared static don't require an instance of the class. They are shared among all users of the class.
+
+```java
+public class Penguin {
+  String name;
+  static String nameOfTallestPenguin;
+}
+```
+
+In this class, every Penguin instance has its own name like, Willy or Lilly, but only one Penguin among all the instances is the tallest.
+
+Think static variable as being member of the single class object. It exists independently of any instances of that class, for example:
+
+```java
+public static void main(String[] args) {
+  var p1 = new Penguin();
+  p1.name = "Lilly";
+  p1.nameOfTallestPenguin = "Lilly";
+
+  var p2 = new Penguin();
+  p2.name = "Willy";
+  p2.nameOfTallestPenguin = "Willy";
+
+  System.out.println(p1.name); // Lilly
+  System.out.println(p1.nameOfTallestPenguin); // Willy
+  System.out.println(p2.name); // Willy
+  System.out.println(p2.nameOfTallestPenguin); // Willy
+}
+```
+
+Each penguin has its own unique name updated, but the static field is shared between both instances.
+
+We can also define static methods, such as `main()` method. We can call the `main()` method directly from the class.
+
+```java
+public class Application {
+  public static int count = 0;
+
+  public static void main(String[] args) {
+    System.out.println(count);
+  }
+}
+```
+
+The JVM calls `Application.main()` to get the program started.
+
+Static methods have two main purposes:
+
+- For utility or helper methods that don't require any object state. Since there is no need to access instance variables, having static methods eliminates the need for the called to instantiate an object just to call the method
+- For state that is shared by all instances of a class, like a counter. All instances must share the same state. Methods that merely use that state should be static as well.
