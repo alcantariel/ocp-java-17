@@ -859,7 +859,7 @@ While some static variables are meant to change as the program runs, like our co
 
 Others static variables are meant to never change, this type of static variable is knows as a `constant`. It uses the final modifiers to ensure the variable never changes.
 
-`Constants` use the modifiers `static final` and a `different naming conventio`n than other variables. They use all `uppercase` letters with underscores between "words", for example:
+`Constants` use the modifiers `static final` and a different `naming convention` than other variables. They use `all uppercase letters with underscores between "words"`, for example:
 
 ```java
 public class ZooPen {
