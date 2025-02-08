@@ -795,3 +795,78 @@ Static methods have two main purposes:
 
 - For utility or helper methods that don't require any object state. Since there is no need to access instance variables, having static methods eliminates the need for the called to instantiate an object just to call the method
 - For state that is shared by all instances of a class, like a counter. All instances must share the same state. Methods that merely use that state should be static as well.
+
+### Class vs. Instance Membership
+
+A static member cannot call an instance member without referencing an instance of the class, since static doesn't require any instances of the class to even exist, for example: [InvalidClassVsInstanceMembership.java](./InvalidClassVsInstanceMembership.java)
+
+```java
+public class InvalidClassVsInstanceMembership {
+  private String name = "Sammy";
+
+  public static void first() {}
+
+  public void second() {
+    System.out.println(name);
+  }
+
+  public static void main(String[] args) {
+    first();
+    second(); // DOES NOT COMPILE
+  }
+}
+```
+
+The compiler will give an error about making a static reference to an instance method.
+
+And fix this by adding static to `second()`, we create a new problem because the variable `name` is an instance variable.
+
+There are two ways we could fix this:
+
+1. Add static to the name variable and method: [FirstExampleClassVsInstanceMembership](./FirstExampleClassVsInstanceMembership.java)
+2. Call `second()` as an instance method and not use static for the method or the variable, for example: [SecondExampleClassVsInstanceMembership](./SecondExampleClassVsInstanceMembership.java)
+
+Now suppose we have a Giraffe class:
+
+```java
+public class Giraffe {
+  public void eat(Giraffe g) {}
+
+  public void drink() {}
+
+  public static void allGiraffeGoHome(Giraffe g) {}
+
+  public static void allGiraffeComeOut() {}
+}
+```
+
+#### Static vs. Instance calls
+
+Method | Calling | Legal?
+--- | --- | ---
+`allGiraffeGoHome()` | `allGiraffeComeOut()` | Yes
+`allGiraffeGoHome()` | `drink()` | No
+`allGiraffeGoHome()` | `g.eat()` | Yes
+`eat()` | `allGiraffeComeOut()` | Yes
+`eat()` | `drink()` | Yes
+`eat()` | `g.eat()` | Yes
+
+### static Variable Modifiers
+
+Static variables can be declared with the same modifiers as instance variables, such as final, transient and volatile.
+
+While some static variables are meant to change as the program runs, like our count example.
+
+Others static variables are meant to never change, this type of static variable is knows as a `constant`. It uses the final modifiers to ensure the variable never changes.
+
+`Constants` use the modifiers `static final` and a `different naming conventio`n than other variables. They use all `uppercase` letters with underscores between "words", for example:
+
+```java
+public class ZooPen {
+  private static final int NUM_BUCKETS = 45;
+
+  public static void main(String[] args) {
+    NUM_BUCKETS = 5; // DOES NOT COMPILE
+  }
+}
+```
