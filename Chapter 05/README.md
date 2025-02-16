@@ -933,3 +933,61 @@ public class ZooParking {
 ```
 
 In this example, we are specifically importing the `asList` method and any time we refer to `asList` in the class, it will call `Arrays.asList()`.
+
+## Passing Data among Methods
+
+Java is a `pass-by-value` language. This means that a copy of the variable is made, and the method receives that copy. Assignments made in the method do not affect the caller.
+
+#### Passing Primitives
+
+[PassingPrimitives.java](./PassingPrimitives.java)
+
+```java
+public static void main(String[] args) {
+  int num = 4;
+  newNumber(num);
+  System.out.println(num); // 4
+}
+
+public static void newNumber(int num) {
+  num = 8;
+}
+```
+
+#### Passing Objects
+
+[PassingObjects.java](./PassingObjects.java)
+
+```java
+public static void main(String[] args) {
+  String name = "Webby";
+  speak(name);
+  System.out.println(name); // Webby
+}
+
+public static void speak(String name) {
+  name = "Georgette";
+}
+```
+
+Just as in the primitive example, the variable assignment is only to the method parameter and doesn't affect the caller.
+
+We can call methods on the parameters, for example:
+
+[CallingMethods.java](./CallingMethods.java)
+
+```java
+public static void main(String[] args) {
+  var name = new StringBuilder("Webby");
+  speak(name);
+  System.out.println(name); // WebbyGeorgette
+}
+
+public static void speak(StringBuilder s) {
+  s.append("Georgette");
+}
+```
+
+In this case, `speak()` calls a method on the parameter. It doesn't reassign s to a different object.
+
+The variable `s` is a copy of the variable name, both point to the same StringBuilder, which means that changes made to the StringBuilder are available to both references.
