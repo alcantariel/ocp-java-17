@@ -899,3 +899,37 @@ We just got through saying that final variables aren't allowed to be reassigned.
 Using static and instance initializers can make our code much harder to read.
 
 But a common case to use a static initializer is when we need to initialize a static field and the code to do so requires more than one line.
+
+### static Imports
+
+We can import a specific class or all the classes in a package, for example:
+
+```java
+import java.util.ArrayList;
+import java.util.*;
+
+public class Imports {
+  public static void main(String[] args) {
+    List<String> list = Arrays.asList("one", "two");
+  }
+}
+```
+
+Imports are convenient because we don't need to specify where each class comes from each time we use it, while static imports are for importing static members of classes like variables and methods.
+
+Just like regular imports, we can use a wildcard or import a specific member.
+
+An example of when static imports shine is when we are referring to a lot of constants in another class.
+
+```java
+import java.util.List;
+import static java.util.Arrays.asList; // static import
+
+public class ZooParking {
+  public static void main(String[] args) {
+    List<String> list = asList("one", "two"); // no Arrays. prefix
+  }
+}
+```
+
+In this example, we are specifically importing the `asList` method and any time we refer to `asList` in the class, it will call `Arrays.asList()`.
