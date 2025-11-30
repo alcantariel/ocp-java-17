@@ -1019,3 +1019,35 @@ public static void swap(int a, int b) {
 Assigning a new primitive or referente to a parameter does not change the caller.
 
 Otherwise, in `Pass-by-reference`, changes made to the parameter within the function are reflected in the original variable in the calling scope.
+
+#### Returning Objects
+
+Getting daa back from a method is easier. A copy is made of the primitive or reference and returned from the method. Most of the time, the returned value is used.
+
+```java
+public class ZooTickets {
+  public static void main (String[] args) {
+    int tickets = 2;
+    String guests = "abc";
+
+    addTickets(tickets);
+    guests = addGuests(guests);
+
+    System.out.println(tickets); // 2
+    System.out.println(guests); // abcd
+  }
+
+  public static int addTickets(int tickets) {
+    tickets++;
+    return tickets;
+  }
+
+  public static String addGuests(String guests) {
+    guests += "d";
+    return guests;
+  }
+}
+```
+
+1. Line 5 calls the method `addTickets` but the returned value is ignored
+2. Line 6 calls the method `add Guests` and reassign the returned value to the guests, so guests becomes `abcd`
