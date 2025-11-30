@@ -991,3 +991,31 @@ public static void speak(StringBuilder s) {
 In this case, `speak()` calls a method on the parameter. It doesn't reassign s to a different object.
 
 The variable `s` is a copy of the variable name, both point to the same StringBuilder, which means that changes made to the StringBuilder are available to both references.
+
+#### Pass-by-Value vs Pass-by-Reference
+
+Different languagues handle parameters in different ways. `Pass-by-value` is used by many languages, including Java.
+
+The `swap()` method does not change the original values. It only changes `a` and `b` within the method.
+
+```java
+public static void main(String[] args) {
+  int original1 = 1;
+  int original2 = 2;
+
+  swap(original1, original2);
+
+  System.out.println(original1); // 1
+  System.out.println(original2); // 2
+}
+
+public static void swap(int a, int b) {
+  int temp = a;
+  a = b;
+  b = temp;
+}
+```
+
+Assigning a new primitive or referente to a parameter does not change the caller.
+
+Otherwise, in `Pass-by-reference`, changes made to the parameter within the function are reflected in the original variable in the calling scope.
