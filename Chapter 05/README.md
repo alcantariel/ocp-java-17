@@ -1051,3 +1051,65 @@ public class ZooTickets {
 
 1. Line 5 calls the method `addTickets` but the returned value is ignored
 2. Line 6 calls the method `add Guests` and reassign the returned value to the guests, so guests becomes `abcd`
+
+#### Autoboxing and Unboxing Variables
+
+Java supports some helpful features around passing primitive and wrapper data types, such as int and Integer.
+
+```java
+  int quack = 5;
+  Integer quackquack = Integer.valueOf(quack); // Convert int to Integer
+  int quackquackquack = quackquack.intValue(); // Convert Integer to int
+```
+
+Useful but verbose. Java has handlers built into the Java language for that automatically convert between primitives and wrapper classes and back again.
+
+`Autoboxing` is the process of converting a primitive into its equivalent wrapper class. While `Unboxing` is the process of converting a wrapper class into its equivalent primitive.
+
+```java
+  int quack = 5;
+  Integer quackquack = quack; // Autoboxing
+  int quackquackquack = quackquack; // Unboxing
+  long quackquackquackquack = quackquack; // Unboxing, then implicit casting
+```
+
+The new code is equiavalent to the previous code, as the compiler is converting the types automatically.
+
+#### Limits of Autoboxing and Numeric Promotion
+
+While Java will implicitly cast a smaller primitive to a larger type, as well as Autobox, it will not do both at same time.
+
+```java
+  Long badGorilla = 8; // DOES NOT COMPILE
+```
+
+Java will automatically cast or autobox the int value to long or Integer, respectively. Neither of these types can be assigned to a Long reference variable, though, so the code does not compile.
+
+Compare this behavior to the previous example, where the unboxed primitive could be implicitly cast to a larger primitive.
+
+What happens if we try to unbox a null?
+
+```java
+  Character elephant = null;
+  char badElephant = elephant; // NullPointerException
+```
+
+Method calls:
+
+```java
+public class Chimpanze {
+
+  public void climb(long t) {}
+
+  public void swing(Integer u) {}
+
+  public void jump(int v) {}
+
+  public static void main(String[] args) {
+    var c = new Chimpanze();
+    c.climb(123);
+    c.swing(123);
+    c.jump(123L); // DOES NOT COMPILE
+  }
+}
+```
