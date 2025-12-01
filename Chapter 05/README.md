@@ -938,7 +938,7 @@ In this example, we are specifically importing the `asList` method and any time 
 
 Java is a `pass-by-value` language. This means that a copy of the variable is made, and the method receives that copy. Assignments made in the method do not affect the caller.
 
-#### Passing Primitives
+### Passing Primitives
 
 [PassingPrimitives.java](./PassingPrimitives.java)
 
@@ -954,7 +954,7 @@ public static void newNumber(int num) {
 }
 ```
 
-#### Passing Objects
+### Passing Objects
 
 [PassingObjects.java](./PassingObjects.java)
 
@@ -1020,7 +1020,7 @@ Assigning a new primitive or referente to a parameter does not change the caller
 
 Otherwise, in `Pass-by-reference`, changes made to the parameter within the function are reflected in the original variable in the calling scope.
 
-#### Returning Objects
+### Returning Objects
 
 Getting daa back from a method is easier. A copy is made of the primitive or reference and returned from the method. Most of the time, the returned value is used.
 
@@ -1052,7 +1052,7 @@ public class ZooTickets {
 1. Line 5 calls the method `addTickets` but the returned value is ignored
 2. Line 6 calls the method `add Guests` and reassign the returned value to the guests, so guests becomes `abcd`
 
-#### Autoboxing and Unboxing Variables
+### Autoboxing and Unboxing Variables
 
 Java supports some helpful features around passing primitive and wrapper data types, such as int and Integer.
 
@@ -1113,3 +1113,5 @@ public class Chimpanze {
   }
 }
 ```
+
+## Overloading Methods
