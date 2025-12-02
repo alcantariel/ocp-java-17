@@ -1098,7 +1098,6 @@ Method calls:
 
 ```java
 public class Chimpanze {
-
   public void climb(long t) {}
 
   public void swing(Integer u) {}
@@ -1115,3 +1114,152 @@ public class Chimpanze {
 ```
 
 ## Overloading Methods
+
+Method overloading occurs when methods in the same class have the same name but different method signatures, which means they use different parameter lists.
+
+Everything other than the method name can vary for overloading methods. This means there can be different access modifiers, optional specifiers (like static), return types, and exception lists.
+
+The following shows five overloaded version of the `fly()` method, for example:
+
+[OverloadingMethods.java](./OverloadingMethods.java)
+
+```java
+public class Falcon {
+  public void fly(int numMiles) {}
+
+  public void fly(short numFeet) {}
+
+  public boolean fly() {
+    return false;
+  }
+
+  void fly(int numMiles, short numFeet) {}
+
+  public void fly(short numFeet, int numMules) throws Exception {}
+}
+```
+
+Invalid overloading:
+
+```java
+public class Eagle {
+  public void fly(int numMiles) {}
+
+  public int fly(int numMiles) {} // DOES NOT COMPILE
+}
+```
+
+This method does not compile because the method signatures are the same.
+
+### Reference Types
+
+Java pick the most specific version of a method, for example:
+
+```java
+public class Pelican {
+  public void fly(String s) {
+    System.out.print("string");
+  }
+
+  public void fly(Object o) {
+    System.out.print("object");
+  }
+
+  public static void main(String[] args) {
+    var p = new Pelican();
+    p.fly("test");
+    System.out.print("-");
+    p.fly(56);
+
+    // string-object
+  }
+}
+```
+
+The first call passes a String and finds a direct match. There is no reason to use the object version when a version with a String as a parameter list exists. The second call looks for an int parameter list. When it does not find one, it autoboxes to Integer. Since it still does not find a match, it goes to the Object one.
+
+### Primitives
+
+Primitives work in a way that is similar to reference variables. Java tries to find the most specific matchingo verloaded method.
+
+```java
+public class Ostrich {
+  public void fly(int i) {
+    System.out.print("int");
+  }
+
+  public void fly(long i) {
+    System.out.print("long");
+  }
+
+  public static void main(String[] args) {
+    var p = new Ostrich();
+    p.fly(123);
+    System.out.print("-");
+    p.fly(123L);
+
+    // int-long
+  }
+}
+```
+
+Both calls have an exact match. If the method with the int parameter list is commented out, the output becomes `long-long`. Java has no problem calling a larger primitive.
+
+### Autoboxing
+
+Autoboxing is applied to method calls, but what if we have both primitive and an integer version?
+
+```java
+  public class Kiwi {
+    public void fly(int numMiles) {}
+
+    public void fly(Integer numMiles) {}
+  }
+```
+
+These method overloads are valid. Java tries to use the most specific parameter list it can find. This is true for autoboxing as well as other matching types.
+
+This means calling `fly(3)` will call the first method. When the primitive int version is not present, Java will autobox. However, when the primitive int version is provided, there is no reason for Java to dot he extra work of autoboxing.
+
+### Arrays
+
+Unlike the previous example, this code does not autobox:
+
+```java
+public static void wal(int[] ints) {}
+
+public static void walk(Integer[] integers) {}
+```
+
+Arrays have been around since the beginning of Java. They specify their actual types. What about generic types, such as List<Integer>?
+
+Topic covered in [Chapter 09](../Chapter%2009/README.md).
+
+### Varargs
+
+```java
+public void fly(int[] lengths) {}
+
+public void fly(int... lenghts) {} // DOES NOT COMPILE
+```
+
+Java treats varargs as if they were an array. This means the method signature is the same for both methods. But the code does not compile `exactly` the same, and this is the difference between them:
+
+```java
+fly(new int[] { 1, 2, 3}); // Allowed to call either fly() method
+
+fly(1, 2, 3); // Allowed to call only the fly() method using varargs
+```
+
+### Putting It All Together
+
+The rules for when an overloaded method is called should be logical. Java calls the more specific method it can. When some of the types interact, the Java rules focus on backward compatibility.
+
+#### The order that Java uses to choose the right overloaded method
+
+Rule | Example of what will be chosen for `glide(1, 2)`
+---- | ----
+Exact match by type | `String glide(int i, int j)`
+Larger primitive type | `String glide(long i, long j)`
+Autoboxed type | `String glide(Integer i, Integer j)`
+Varargs | `String glide(int... nums)`
